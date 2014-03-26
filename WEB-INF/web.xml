@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>LoadDataServlet</servlet-name>
+        <servlet-class>geo.controller.LoadDataServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GeoCodeServlet</servlet-name>
+        <servlet-class>geo.controller.GeoCodeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadMRTServlet</servlet-name>
+        <servlet-class>geo.controller.LoadMRTServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoadDataServlet</servlet-name>
+        <url-pattern>/loaddata</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GeoCodeServlet</servlet-name>
+        <url-pattern>/geocode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadMRTServlet</servlet-name>
+        <url-pattern>/loadmrt</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
