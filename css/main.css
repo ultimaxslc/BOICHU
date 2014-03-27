@@ -55,6 +55,12 @@ body { height: 100%; margin: 0; padding: 0 }
     text-transform: uppercase;
 }
 
+.icon
+{
+    width:40px;
+    height:40px;
+}
+
 h4{
     text-align:center;
 }

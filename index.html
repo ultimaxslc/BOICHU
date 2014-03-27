@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="../css/leafletcontrol/L.Control.Pan.css">
         <link rel="stylesheet" href="css/MarkerCluster.css"/>
         <link rel="stylesheet" href="css/MarkerCluster.Default.css"/>
+        <link rel="stylesheet" href="css/reveal.css"/>
         <!--[if lte IE8]>
         <link rel="stylesheet" href=css/leaflet.ie.css"/>
         <![endif]-->
@@ -17,12 +18,14 @@
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Pan.js"></script>
         <script src='js/jquery-1.11.0.js'></script>
+        <script src='js/jquery-migrate.js'></script>
         <script src="js/leaflet-google.js"></script>
         <script src="js/leaflet.markercluster.js"></script>
         <script src="js/TileLayer.Grayscale.js"></script>
         <script src="js/heatcanvas.js"></script>
         <script src="js/heatcanvas-leaflet.js"></script>
         <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtDPnT0d7d8mKYnkua06UZzDgksNIo8A&sensor=true'></script>
+        <script type="text/javascript" src="js/jquery.reveal.js"></script>
         <script type="text/javascript" src="js/webgl-heatmap.js"></script>
         <script type="text/javascript" src="js/webgl-heatmap-leaflet.js"></script>
         <script type="text/javascript" src="js/shCore.js"></script>
@@ -36,14 +39,18 @@
         <script src="js/usermarker.js"></script>
         <script src="js/main.js"></script>
         <script>
-            
-
             window.onload = loadScript;
-
         </script>
     </head>
     <body>
         <div class="loading"><img src="img/loading.gif"/></div>
         <div id="map" class="leaflet-fade-anim"/>
+
+        <div id="myModal" class="reveal-modal">
+            <h1>Reveal Modal Goodness</h1>
+            <p>This is a default modal in all its glory, but any of the styles here can easily be changed in the CSS.</p>
+            <a class="close-reveal-modal">&#215;</a>
+        </div>
+
     </body>
 </html>
