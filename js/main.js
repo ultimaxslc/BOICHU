@@ -389,7 +389,7 @@ function getSelectedVariableInChoroplethControl() {
 
     setChoroplethFocus(polygonJson, chosenOption);
     polygonBoundary.setStyle(styleChoropleth);
-    setChoroplethLegend();
+    setChoroplethLegendFor(chosenOption);
     
     map.addControl(polygonBoundaryLegend);
     map.addControl(choroplethInfo);
@@ -454,7 +454,7 @@ function setChoroplethLayer(polygonJson, transactionJson, chosenFocus) {
         onEachFeature: onChoroplethEachFeature
     });
 
-    setChoroplethLegend();
+    setChoroplethLegendFor(chosenFocus);
     addChoroplethHoverInfoControl();
 }
 
@@ -524,7 +524,7 @@ function getSubZoneInfo(subzone) {
             choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
-function setChoroplethLegend() {
+function setChoroplethLegendFor(chosenOption) {
     var colourArray = [];
     var interval = (choroplethMaxValue - choroplethMinValue) / numberOfChoroplethClasses;
     var lowerBound = choroplethMinValue;
@@ -532,7 +532,15 @@ function setChoroplethLegend() {
     var key;
 
     while (upperBound < choroplethMaxValue) {
-        key = Math.round(lowerBound) + "-" + Math.round(upperBound);
+        if (chosenOption == 'Average Transaction Amount' ||
+            chosenOption == 'Total Transaction Amount' ||
+            chosenOption == 'Average Price per Area' ||
+            chosenOption == 'Average Price Area'){
+            key = numeral(lowerBound).format('$0,0.00') + ' - ' + numeral(upperBound).format('$0,0.00');
+        } else {
+            key = numeral(lowerBound).format('0,0') + ' - ' + numeral(upperBound).format('0,0');
+            // key = Math.round(lowerBound) + "-" + Math.round(upperBound);
+        }
         colourArray[key] = getChoroplethColour(upperBound);
         lowerBound = upperBound;
         upperBound = upperBound + interval;
