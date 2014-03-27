@@ -14,6 +14,8 @@ var transactedPriceHeatMap;
 var PointSymbolMap;
 var PointSymbolMapLegend;
 
+var pointSymbolHeatMap;
+
 var mrtMapLines = [];
 var mrtMapLayerReference;
 
@@ -65,6 +67,12 @@ function loadScript() {
     });
     //initializing the layer groups
     PointSymbolMap = L.layerGroup();
+    pointSymbolHeatMap = new L.TileLayer.WebGLHeatMap({}, {
+        size: 1000,
+        autoresize: true,
+        opacity: 0.5
+        // zIndex: 100
+    });
     proportionalSymbolMap = L.layerGroup();
     schoolsLayer = L.layerGroup();
 
@@ -77,7 +85,8 @@ function loadScript() {
         //treat the data according to heatmap
         addHeatMapLayer(jsonArray, 'Transacted');
         //treat the data according to point symbols
-        addPointSymbolMap(jsonArray, 'Property T');
+        // addPointSymbolMap(jsonArray, 'Property T');
+        addPointSymbolHeatMap(jsonArray);
 
         $.getJSON('data/Polygon.geojson', function(polygonData) {
             boundaryArray = polygonData;
@@ -135,6 +144,7 @@ function loadScript() {
         'Cluster Marker': markersCluster,
         'Point Symbol': PointSymbolMap,
         'Transacted Price Heat Map': transactedPriceHeatMap,
+        'Heat Map' : pointSymbolHeatMap,
         'MRT Map': mrtMapLayerReference,
         'Singapore Sub Zones': polygonBoundary,
         'Proportional Symbol': proportionalSymbolMap,
@@ -363,12 +373,12 @@ function renderChoroplethVariableControl() {
     choroplethControl.onAdd = function(map) {
         this._div = L.DomUtil.create('div', 'varControl');
         this._div.innerHTML = '<select onchange="getSelectedVariableInChoroplethControl()">' +
-                '<option value="Number Of Transactions"' + (choroplethFocus === "Number Of Transactions" ? " selected" : "") + '>Number of Transactions</option>' +
-                '<option value="Total Area Sold"' + (choroplethFocus === "Total Area Sold" ? " selected" : "") + '>Total Area Sold</option>' +
-                '<option value="Total Transaction Amount"' + (choroplethFocus === "Total Transaction Amount" ? " selected" : "") + '>Total Transaction Amount</option>' +
-                '<option value="Average Transaction Amount"' + (choroplethFocus === "Average Transaction Amount" ? " selected" : "") + '>Average Transaction Amount</option>' +
-                '<option value="Average Price Area"' + (choroplethFocus === "Average Price Area" ? " selected" : "") + '>Average Price per Area</option>' +
-                '</select>';
+            '<option value="Number Of Transactions"' + (choroplethFocus === "Number Of Transactions" ? " selected" : "") + '>Number of Transactions</option>' +
+            '<option value="Total Area Sold"' + (choroplethFocus === "Total Area Sold" ? " selected" : "") + '>Total Area Sold</option>' +
+            '<option value="Total Transaction Amount"' + (choroplethFocus === "Total Transaction Amount" ? " selected" : "") + '>Total Transaction Amount</option>' +
+            '<option value="Average Transaction Amount"' + (choroplethFocus === "Average Transaction Amount" ? " selected" : "") + '>Average Transaction Amount</option>' +
+            '<option value="Average Price Area"' + (choroplethFocus === "Average Price Area" ? " selected" : "") + '>Average Price per Area</option>' +
+            '</select>';
         // this.update();
         return this._div;
     };
@@ -390,7 +400,7 @@ function getSelectedVariableInChoroplethControl() {
     setChoroplethFocus(polygonJson, chosenOption);
     polygonBoundary.setStyle(styleChoropleth);
     setChoroplethLegendFor(chosenOption);
-    
+
     map.addControl(polygonBoundaryLegend);
     map.addControl(choroplethInfo);
     map.addControl(choroplethControl);
@@ -402,8 +412,8 @@ function getSubZoneProportionalInfo(subzone) {
     var interestedValue = subzone[proportionalFocus];
 
     return '<b>Area Name: ' + subzone.DGPZ_NAME + '</b><br />' +
-            'Sub Area Name: ' + subzone.DGPSZ_NAME + '<br>' +
-            proportionalFocus + ': ' + Math.round(interestedValue) + '<br>';
+        'Sub Area Name: ' + subzone.DGPSZ_NAME + '<br>' +
+        proportionalFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
 function setChoroplethLayer(polygonJson, transactionJson, chosenFocus) {
@@ -520,8 +530,8 @@ function getSubZoneInfo(subzone) {
     var interestedValue = subzone.properties[choroplethFocus];
 
     return '<b>Area Name: ' + zone.DGPZ_NAME + '</b><br />' +
-            'Sub Area Name: ' + zone.DGPSZ_NAME + '<br>' +
-            choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
+        'Sub Area Name: ' + zone.DGPSZ_NAME + '<br>' +
+        choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
 function setChoroplethLegendFor(chosenOption) {
@@ -535,7 +545,7 @@ function setChoroplethLegendFor(chosenOption) {
         if (chosenOption == 'Average Transaction Amount' ||
             chosenOption == 'Total Transaction Amount' ||
             chosenOption == 'Average Price per Area' ||
-            chosenOption == 'Average Price Area'){
+            chosenOption == 'Average Price Area') {
             key = numeral(lowerBound).format('$0,0.00') + ' - ' + numeral(upperBound).format('$0,0.00');
         } else {
             key = numeral(lowerBound).format('0,0') + ' - ' + numeral(upperBound).format('0,0');
@@ -564,14 +574,14 @@ function getChoroplethColour(value) {
     var interval = (choroplethMaxValue - choroplethMinValue) / numberOfChoroplethClasses;
 
     return value > choroplethMaxValue - 1 * interval ? '#08306b' :
-            value > choroplethMaxValue - 2 * interval ? '#08519c' :
-            value > choroplethMaxValue - 3 * interval ? '#2171b5' :
-            value > choroplethMaxValue - 4 * interval ? '#4292c6' :
-            value > choroplethMaxValue - 5 * interval ? '#6baed6' :
-            value > choroplethMaxValue - 6 * interval ? '#9ecae1' :
-            value > choroplethMaxValue - 7 * interval ? '#c6dbef' :
-            value > choroplethMaxValue - 8 * interval ? '#deebf7' :
-            '#f7fbff';
+        value > choroplethMaxValue - 2 * interval ? '#08519c' :
+        value > choroplethMaxValue - 3 * interval ? '#2171b5' :
+        value > choroplethMaxValue - 4 * interval ? '#4292c6' :
+        value > choroplethMaxValue - 5 * interval ? '#6baed6' :
+        value > choroplethMaxValue - 6 * interval ? '#9ecae1' :
+        value > choroplethMaxValue - 7 * interval ? '#c6dbef' :
+        value > choroplethMaxValue - 8 * interval ? '#deebf7' :
+        '#f7fbff';
 }
 
 //Information Control for dynamic tooltipping
@@ -749,13 +759,30 @@ function runAHP() {
     };
     /*
      * To be uncommented when all the parts fall in place...
-     * 
+     *
      * var dataMarkerArray = getMarkerDetails();
-     * 
+     *
      */
 
 
     processAHP(dataMarkerArray);
 }
 
+function addPointSymbolHeatMap(json) {
+    // array of arrays 
+    var heatMapArray = [];
 
+    $.each(json['features'], function(i, val) {
+        var properties = [];
+        properties['lat'] = val["properties"]["latitude"];
+        properties['lng'] = val["properties"]["longitude"];
+        properties['size'] = 0.05;
+        properties['intensity'] = 5;
+        heatMapArray.push(properties);
+    });
+
+    for (var i = 0, len = heatMapArray.length; i < len; i++) {
+        var point = heatMapArray[i];
+        pointSymbolHeatMap.addDataPoint(point['lat'], point['lng'], point['size'], point['intensity']);
+    }
+}
