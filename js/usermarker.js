@@ -38,7 +38,7 @@ function addUserMarkerControl() {
     };
     ahpControl.closeForm = function() {
         // this._div.innerHTML = '<div onclick=ahpControl.initialiseForm();> Activate AHP </div>';
-        this._div.innerHTML = '<a href="#" class="big-link" data-reveal-id="myModal" data-animation="fade"><img class="icon" src="img/ahpicon.png"></a>';
+        this._div.innerHTML = '<a href="#" class="big-link" data-reveal-id="myModal"><img class="icon" src="img/ahpicon.png"></a>';
     };
 
     map.addControl(ahpControl);
