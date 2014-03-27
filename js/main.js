@@ -35,6 +35,8 @@ var numberOfChoroplethClasses = 9;
 var choroplethFocus;
 var choroplethControl;
 
+var layerControl;
+
 function loadScript() {
 
     $.ajaxSetup({
@@ -142,7 +144,7 @@ function loadScript() {
 
     map.addLayer(openStreeMapLayer);
     addHoverInfoControl();
-    L.control.layers(baseMaps, overlayMaps, {
+    layerControl = L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(map);
     renderChoroplethVariableControl()
@@ -353,31 +355,46 @@ function addProportionalHoverInfoControl() {
     };
 }
 
-function renderChoroplethVariableControl(){
+function renderChoroplethVariableControl() {
     choroplethControl = L.control({
         position: 'bottomright'
     });
 
-    choroplethControl.onAdd = function(map){
+    choroplethControl.onAdd = function(map) {
         this._div = L.DomUtil.create('div', 'varControl');
         this._div.innerHTML = '<select onchange="getSelectedVariableInChoroplethControl()">' +
-        '<option value="Number of Transactions">Number of Transactions</option>' +
-        '<option value="Total Area Sold">Total Area Sold</option>' +
-        '<option value="Total Transaction Amount">Total Transaction Amount</option>' +
-        '<option value="Average Transaction Amount">Average Transaction Amount</option>' +
-        '<option value="Average Price Area">Average Price per Area</option>' +
-        '</select>'
+                '<option value="Number Of Transactions"' + (choroplethFocus === "Number Of Transactions" ? " selected" : "") + '>Number of Transactions</option>' +
+                '<option value="Total Area Sold"' + (choroplethFocus === "Total Area Sold" ? " selected" : "") + '>Total Area Sold</option>' +
+                '<option value="Total Transaction Amount"' + (choroplethFocus === "Total Transaction Amount" ? " selected" : "") + '>Total Transaction Amount</option>' +
+                '<option value="Average Transaction Amount"' + (choroplethFocus === "Average Transaction Amount" ? " selected" : "") + '>Average Transaction Amount</option>' +
+                '<option value="Average Price Area"' + (choroplethFocus === "Average Price Area" ? " selected" : "") + '>Average Price per Area</option>' +
+                '</select>';
         // this.update();
         return this._div;
-    }
+    };
 
     // choroplethControl.update = function(subzone) {
     //     this._div.innerHTML = '<h4>Sub Zone</h4>' + (subzone ? getSubZoneProportionalInfo(subzone) : 'Hover over a Sub Zone');
     // };
 }
 
-function getSelectedVariableInChoroplethControl(){
-    console.log($(".varControl option:selected").val());
+function getSelectedVariableInChoroplethControl() {
+
+    var chosenOption = $(".varControl option:selected").val();
+    var polygonJson = polygonBoundary.toGeoJSON();
+
+    map.removeControl(polygonBoundaryLegend);
+    map.removeControl(choroplethInfo);
+    map.removeControl(choroplethControl);
+
+    setChoroplethFocus(polygonJson, chosenOption);
+    polygonBoundary.setStyle(styleChoropleth);
+    setChoroplethLegend();
+    
+    map.addControl(polygonBoundaryLegend);
+    map.addControl(choroplethInfo);
+    map.addControl(choroplethControl);
+
 }
 
 function getSubZoneProportionalInfo(subzone) {
@@ -385,8 +402,8 @@ function getSubZoneProportionalInfo(subzone) {
     var interestedValue = subzone[proportionalFocus];
 
     return '<b>Area Name: ' + subzone.DGPZ_NAME + '</b><br />' +
-        'Sub Area Name: ' + subzone.DGPSZ_NAME + '<br>' +
-        proportionalFocus + ': ' + Math.round(interestedValue) + '<br>';
+            'Sub Area Name: ' + subzone.DGPSZ_NAME + '<br>' +
+            proportionalFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
 function setChoroplethLayer(polygonJson, transactionJson, chosenFocus) {
@@ -503,8 +520,8 @@ function getSubZoneInfo(subzone) {
     var interestedValue = subzone.properties[choroplethFocus];
 
     return '<b>Area Name: ' + zone.DGPZ_NAME + '</b><br />' +
-        'Sub Area Name: ' + zone.DGPSZ_NAME + '<br>' +
-        choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
+            'Sub Area Name: ' + zone.DGPSZ_NAME + '<br>' +
+            choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
 function setChoroplethLegend() {
@@ -539,14 +556,14 @@ function getChoroplethColour(value) {
     var interval = (choroplethMaxValue - choroplethMinValue) / numberOfChoroplethClasses;
 
     return value > choroplethMaxValue - 1 * interval ? '#08306b' :
-        value > choroplethMaxValue - 2 * interval ? '#08519c' :
-        value > choroplethMaxValue - 3 * interval ? '#2171b5' :
-        value > choroplethMaxValue - 4 * interval ? '#4292c6' :
-        value > choroplethMaxValue - 5 * interval ? '#6baed6' :
-        value > choroplethMaxValue - 6 * interval ? '#9ecae1' :
-        value > choroplethMaxValue - 7 * interval ? '#c6dbef' :
-        value > choroplethMaxValue - 8 * interval ? '#deebf7' :
-        '#f7fbff';
+            value > choroplethMaxValue - 2 * interval ? '#08519c' :
+            value > choroplethMaxValue - 3 * interval ? '#2171b5' :
+            value > choroplethMaxValue - 4 * interval ? '#4292c6' :
+            value > choroplethMaxValue - 5 * interval ? '#6baed6' :
+            value > choroplethMaxValue - 6 * interval ? '#9ecae1' :
+            value > choroplethMaxValue - 7 * interval ? '#c6dbef' :
+            value > choroplethMaxValue - 8 * interval ? '#deebf7' :
+            '#f7fbff';
 }
 
 //Information Control for dynamic tooltipping
