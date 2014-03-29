@@ -100,9 +100,9 @@ Floor Area: <input type='text' id ='area" + id + "' name='area' value='" + area 
 }
 
 function markerChangeDetails(id) {
-	//on marker change details, need to get values from form
-	//change the input marker property '.options'
-	//re-bind the popup again with the new input.
+    //on marker change details, need to get values from form
+    //change the input marker property '.options'
+    //re-bind the popup again with the new input.
     var newName = document.getElementById("name" + id).value;
     var newPrice = document.getElementById("price" + id).value;
     var newArea = document.getElementById("area" + id).value;
@@ -176,13 +176,10 @@ function getMarkerDetails() {
         locationArray.push(id);
         priceArray.value.push(price);
         areaArray.value.push(area);
-
-        //bottom 2 to be coded...
-        mrtArray.value.push(getNearestFacility(latlng, mrtList));
-        schoolArray.value.push(getNearestFacility(latlng, schoolList));
+        mrtArray.value.push(getNearestFacility(latlng, mrtStationGeoJsonData));
+        schoolArray.value.push(getNearestFacility(latlng, schoolGeoJsonData));
 
     }
-
 
     var dataMarkerArray = {
         locationArray: locationArray,
@@ -193,39 +190,59 @@ function getMarkerDetails() {
             schoolArray
         ]
     };
-
+    console.log(dataMarkerArray);
     return dataMarkerArray;
 
 }
 
 function getNearestFacility(latlng, facilityList) {
-    //iterate list to find min distance from latlng
-    //
+    //iterate list to find min distance from latlng (Distance returned in KM)
+    // ANY REQUIREMENT TO HIGHLIGHT THE NEAREST FACILITY?
 
-    return 0;
+    var lng = latlng.lng;
+    var lat = latlng.lat;
+    var minDistance = Number.MAX_VALUE;
+
+    for (var i = 0; i < facilityList.features.length; i++) {
+        var coords = facilityList.features[i].geometry.coordinates;
+        var facilityLng = coords[0];
+        var facilityLat = coords[1];
+
+        var dist = calculateDistance(lat, lng, facilityLat, facilityLng);
+
+        if (dist <= minDistance) {
+            minDistance = dist;
+        }
+    }
+
+    console.log(minDistance);
+
+    return minDistance;
 }
 
-
-//credit: http://www.movable-type.co.uk/scripts/latlong.html  using the Haversine Formula
 function calculateDistance(lat1, lon1, lat2, lon2) {
-    var R = 6371; // km
-    var dLat = (lat2 - lat1).toRad();
-    var dLon = (lon2 - lon1).toRad();
-    var lat1 = lat1.toRad();
-    var lat2 = lat2.toRad();
 
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2)
+            ;
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
-
+    var d = R * c; // Distance in km
     return d;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180)
 }
 
 
 function testmethod() {
 
-    alert("hello world");
+    getMarkerDetails();
 
 }
 

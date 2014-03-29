@@ -39,6 +39,9 @@ var choroplethControl;
 
 var layerControl;
 
+var mrtStationGeoJsonData;
+var schoolGeoJsonData;
+
 function loadScript() {
 
     $.ajaxSetup({
@@ -85,7 +88,7 @@ function loadScript() {
         //treat the data according to heatmap
         addHeatMapLayer(jsonArray, 'Transacted');
         //treat the data according to point symbols
-        // addPointSymbolMap(jsonArray, 'Property T');
+        addPointSymbolMap(jsonArray, 'Property T');
         addPointSymbolHeatMap(jsonArray);
 
         $.getJSON('data/Polygon.geojson', function(polygonData) {
@@ -218,7 +221,7 @@ function addMRTStationMap(stationData, railData) {
         iconUrl: 'img/mrt.png',
         iconSize: [15, 15]
     });
-
+    
     var geoJsonLayer = new L.geoJson(railData, {
         style: function(feature, latlng) {
             switch (feature.properties.name) {
@@ -253,6 +256,7 @@ function addMRTStationMap(stationData, railData) {
 
     mrtMapLayerReference = geoJsonLayer;
     mrtMapLayerReference.addData(stationData);
+    mrtStationGeoJsonData = stationData;
 }
 
 function addStadiumMap(stadiumData) {
@@ -276,6 +280,7 @@ function addSchoolsMap(schoolData) {
         }
     });
     schoolsLayer = geoJsonLayer;
+    schoolGeoJsonData = schoolData;
 }
 
 
