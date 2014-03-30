@@ -1,46 +1,4 @@
-var map;
-
-var jsonArray = [];
-var boundaryArray = [];
-
-var googleLayerSatellite;
-var googleLayerStreet;
-var openStreeMapLayer;
-
-var markersCluster;
-
-var transactedPriceHeatMap;
-
-var PointSymbolMap;
-var PointSymbolMapLegend;
-
-var pointSymbolHeatMap;
-
-var mrtMapLines = [];
-var mrtMapLayerReference;
-
-var schoolsLayer;
-var stadiumsLayer;
-
-var polygonBoundary;
-var polygonBoundaryLegend;
-
-var proportionalSymbolMap;
-var proportionalInfo;
-var proportionalFocus;
-
-var info;
-var choroplethInfo;
-var choroplethMaxValue;
-var choroplethMinValue;
-var numberOfChoroplethClasses = 9;
-var choroplethFocus;
-var choroplethControl;
-
-var layerControl;
-
-var mrtStationGeoJsonData;
-var schoolGeoJsonData;
+var map, jsonArray = [], boundaryArray = [] ,googleLayerSatellite,googleLayerStreet,openStreeMapLayer,markersCluster,transactedPriceHeatMap,PointSymbolMap,PointSymbolMapLegend,pointSymbolHeatMap,mrtMapLines = [],mrtMapLayerReference,schoolsLayer,stadiumsLayer,polygonBoundary,polygonBoundaryLegend,proportionalSymbolMap,proportionalInfo,proportionalFocus,info,choroplethInfo,choroplethMaxValue,choroplethMinValue,numberOfChoroplethClasses = 9,choroplethFocus,choroplethControl,layerControl,mrtStationGeoJsonData,schoolGeoJsonData;
 
 function loadScript() {
 
@@ -260,11 +218,21 @@ function addMRTStationMap(stationData, railData) {
 }
 
 function addStadiumMap(stadiumData) {
+    var stadiumIcon = L.icon({
+        iconUrl: 'img/stadium.png',
+        iconSize: [15, 15]
+    });
+
     var geoJsonLayer = new L.geoJson(stadiumData, {
         onEachFeature: function(feature, layer) {
             layer.bindPopup(renderFeatureTableFor(feature));
             // layer.on('mouseover', onCircleMouseOver);
             // layer.on('mouseout', onCircleMouseOut);
+        },
+        pointToLayer: function(feature, latlng) {
+            return L.marker(latlng, {
+                icon: stadiumIcon
+            });
         }
     });
     stadiumsLayer = geoJsonLayer;
@@ -272,11 +240,21 @@ function addStadiumMap(stadiumData) {
 
 
 function addSchoolsMap(schoolData) {
+    var schoolIcon = L.icon({
+        iconUrl: 'img/school.png',
+        iconSize: [15, 15]
+    });
+
     var geoJsonLayer = new L.geoJson(schoolData, {
         onEachFeature: function(feature, layer) {
             layer.bindPopup(renderFeatureTableFor(feature));
             // layer.on('mouseover', onCircleMouseOver);
             // layer.on('mouseout', onCircleMouseOut);
+        },
+        pointToLayer: function(feature, latlng) {
+            return L.marker(latlng, {
+                icon: schoolIcon
+            });
         }
     });
     schoolsLayer = geoJsonLayer;
