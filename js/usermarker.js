@@ -109,7 +109,7 @@ return "<div> \n\
             </tr> \n\
             <tr> \n\
                 <td class='titlecell'>Name:</td> \n\
-                <td class='input-label-field'><input type='text' id='name" + id + "' name='name' value='" + name + "' oninput=markerChangeDetails( " + id + "); /> \n\
+                <td class='input-label-field'><input type='text' id='name" + id + "' name='name' value='" + name + "' oninput=markerChangeDetails(" + id + "); /> \n\
                 </td> \n\
             </tr> \n\
             <tr> \n\
@@ -119,7 +119,7 @@ return "<div> \n\
             <tr> \n\
                 <td class='titlecell'>Floor Area:</td> \n\
                 <td class='input-label-field'> \n\
-                    <input type='text' id='area" + id + "' name='area' value='" + area + "' oninput=markerChangeDetails( " + id + "); /> \n\
+                    <input type='text' id='area" + id + "' name='area' value='" + area + "' oninput=markerChangeDetails(" + id + "); /> \n\
                 </td> \n\
             </tr> \n\
         </table> \n\
@@ -172,6 +172,8 @@ function getMarkerDetails() {
     //mrt station
     //school
     //get userinput details
+    
+    
     var locationArray = new Array();
 
     var priceArray = {
@@ -219,7 +221,7 @@ function getMarkerDetails() {
             schoolArray
         ]
     };
-    console.log(dataMarkerArray);
+    //console.log(dataMarkerArray);
     return dataMarkerArray;
 
 }
@@ -244,7 +246,7 @@ function getNearestFacility(latlng, facilityList) {
         }
     }
 
-    console.log(minDistance);
+    //console.log(minDistance);
 
     return minDistance;
 }
@@ -266,13 +268,6 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
 function deg2rad(deg) {
     return deg * (Math.PI / 180)
-}
-
-
-function testmethod() {
-
-    getMarkerDetails();
-
 }
 
 /*

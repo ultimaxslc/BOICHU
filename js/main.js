@@ -1,4 +1,6 @@
-var map, jsonArray = [], boundaryArray = [] ,googleLayerSatellite,googleLayerStreet,openStreeMapLayer,markersCluster,transactedPriceHeatMap,PointSymbolMap,PointSymbolMapLegend,pointSymbolHeatMap,mrtMapLines = [],mrtMapLayerReference,schoolsLayer,stadiumsLayer,polygonBoundary,polygonBoundaryLegend,proportionalSymbolMap,proportionalInfo,proportionalFocus,info,choroplethInfo,choroplethMaxValue,choroplethMinValue,numberOfChoroplethClasses = 9,choroplethFocus,choroplethControl,layerControl,mrtStationGeoJsonData,schoolGeoJsonData;
+var map, jsonArray = [], boundaryArray = [], googleLayerSatellite, googleLayerStreet, openStreeMapLayer, markersCluster, transactedPriceHeatMap, PointSymbolMap, PointSymbolMapLegend, pointSymbolHeatMap, mrtMapLines = [], mrtMapLayerReference, schoolsLayer, stadiumsLayer, polygonBoundary, polygonBoundaryLegend, proportionalSymbolMap, proportionalInfo, proportionalFocus, info, choroplethInfo, choroplethMaxValue, choroplethMinValue, numberOfChoroplethClasses = 9, choroplethFocus, choroplethControl, layerControl, mrtStationGeoJsonData, schoolGeoJsonData;
+
+var bounceCount = 5;
 
 function loadScript() {
 
@@ -32,7 +34,7 @@ function loadScript() {
         size: 1000,
         autoresize: true,
         opacity: 0.5
-        // zIndex: 100
+                // zIndex: 100
     });
     proportionalSymbolMap = L.layerGroup();
     schoolsLayer = L.layerGroup();
@@ -105,7 +107,7 @@ function loadScript() {
         'Cluster Marker': markersCluster,
         'Point Symbol': PointSymbolMap,
         'Transacted Price Heat Map': transactedPriceHeatMap,
-        'Heat Map' : pointSymbolHeatMap,
+        'Heat Map': pointSymbolHeatMap,
         'MRT Map': mrtMapLayerReference,
         'Singapore Sub Zones': polygonBoundary,
         'Proportional Symbol': proportionalSymbolMap,
@@ -179,7 +181,7 @@ function addMRTStationMap(stationData, railData) {
         iconUrl: 'img/mrt.png',
         iconSize: [15, 15]
     });
-    
+
     var geoJsonLayer = new L.geoJson(railData, {
         style: function(feature, latlng) {
             switch (feature.properties.name) {
@@ -356,12 +358,12 @@ function renderChoroplethVariableControl() {
     choroplethControl.onAdd = function(map) {
         this._div = L.DomUtil.create('div', 'varControl');
         this._div.innerHTML = '<select onchange="getSelectedVariableInChoroplethControl()">' +
-            '<option value="Number Of Transactions"' + (choroplethFocus === "Number Of Transactions" ? " selected" : "") + '>Number of Transactions</option>' +
-            '<option value="Total Area Sold"' + (choroplethFocus === "Total Area Sold" ? " selected" : "") + '>Total Area Sold</option>' +
-            '<option value="Total Transaction Amount"' + (choroplethFocus === "Total Transaction Amount" ? " selected" : "") + '>Total Transaction Amount</option>' +
-            '<option value="Average Transaction Amount"' + (choroplethFocus === "Average Transaction Amount" ? " selected" : "") + '>Average Transaction Amount</option>' +
-            '<option value="Average Price Area"' + (choroplethFocus === "Average Price Area" ? " selected" : "") + '>Average Price per Area</option>' +
-            '</select>';
+                '<option value="Number Of Transactions"' + (choroplethFocus === "Number Of Transactions" ? " selected" : "") + '>Number of Transactions</option>' +
+                '<option value="Total Area Sold"' + (choroplethFocus === "Total Area Sold" ? " selected" : "") + '>Total Area Sold</option>' +
+                '<option value="Total Transaction Amount"' + (choroplethFocus === "Total Transaction Amount" ? " selected" : "") + '>Total Transaction Amount</option>' +
+                '<option value="Average Transaction Amount"' + (choroplethFocus === "Average Transaction Amount" ? " selected" : "") + '>Average Transaction Amount</option>' +
+                '<option value="Average Price Area"' + (choroplethFocus === "Average Price Area" ? " selected" : "") + '>Average Price per Area</option>' +
+                '</select>';
         // this.update();
         return this._div;
     };
@@ -395,8 +397,8 @@ function getSubZoneProportionalInfo(subzone) {
     var interestedValue = subzone[proportionalFocus];
 
     return '<b>Area Name: ' + subzone.DGPZ_NAME + '</b><br />' +
-        'Sub Area Name: ' + subzone.DGPSZ_NAME + '<br>' +
-        proportionalFocus + ': ' + Math.round(interestedValue) + '<br>';
+            'Sub Area Name: ' + subzone.DGPSZ_NAME + '<br>' +
+            proportionalFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
 function setChoroplethLayer(polygonJson, transactionJson, chosenFocus) {
@@ -513,8 +515,8 @@ function getSubZoneInfo(subzone) {
     var interestedValue = subzone.properties[choroplethFocus];
 
     return '<b>Area Name: ' + zone.DGPZ_NAME + '</b><br />' +
-        'Sub Area Name: ' + zone.DGPSZ_NAME + '<br>' +
-        choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
+            'Sub Area Name: ' + zone.DGPSZ_NAME + '<br>' +
+            choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
 function setChoroplethLegendFor(chosenOption) {
@@ -526,9 +528,9 @@ function setChoroplethLegendFor(chosenOption) {
 
     while (upperBound < choroplethMaxValue) {
         if (chosenOption == 'Average Transaction Amount' ||
-            chosenOption == 'Total Transaction Amount' ||
-            chosenOption == 'Average Price per Area' ||
-            chosenOption == 'Average Price Area') {
+                chosenOption == 'Total Transaction Amount' ||
+                chosenOption == 'Average Price per Area' ||
+                chosenOption == 'Average Price Area') {
             key = numeral(lowerBound).format('$0,0.00') + ' - ' + numeral(upperBound).format('$0,0.00');
         } else {
             key = numeral(lowerBound).format('0,0') + ' - ' + numeral(upperBound).format('0,0');
@@ -557,14 +559,14 @@ function getChoroplethColour(value) {
     var interval = (choroplethMaxValue - choroplethMinValue) / numberOfChoroplethClasses;
 
     return value > choroplethMaxValue - 1 * interval ? '#08306b' :
-        value > choroplethMaxValue - 2 * interval ? '#08519c' :
-        value > choroplethMaxValue - 3 * interval ? '#2171b5' :
-        value > choroplethMaxValue - 4 * interval ? '#4292c6' :
-        value > choroplethMaxValue - 5 * interval ? '#6baed6' :
-        value > choroplethMaxValue - 6 * interval ? '#9ecae1' :
-        value > choroplethMaxValue - 7 * interval ? '#c6dbef' :
-        value > choroplethMaxValue - 8 * interval ? '#deebf7' :
-        '#f7fbff';
+            value > choroplethMaxValue - 2 * interval ? '#08519c' :
+            value > choroplethMaxValue - 3 * interval ? '#2171b5' :
+            value > choroplethMaxValue - 4 * interval ? '#4292c6' :
+            value > choroplethMaxValue - 5 * interval ? '#6baed6' :
+            value > choroplethMaxValue - 6 * interval ? '#9ecae1' :
+            value > choroplethMaxValue - 7 * interval ? '#c6dbef' :
+            value > choroplethMaxValue - 8 * interval ? '#deebf7' :
+            '#f7fbff';
 }
 
 //Information Control for dynamic tooltipping
@@ -707,48 +709,74 @@ function zoomToFeature(e) {
 
 function runAHP() {
     //get locationArray and criteriaValueArray
+    //
     //locationArray can be array of names or ID, to identify the location
-    //need error handling for user inputs
+    //
+    //need error handling for user inputs??
 
-    var priceArray = {
-        smallerBetter: true,
-        value: [1000, 2000, 500]
-    };
-
-    var areaArray = {
-        smallerBetter: false,
-        value: [100, 50, 100]
-    };
-
-    var mrtArray = {
-        smallerBetter: true,
-        value: [50, 100, 20]
-    };
-
-    var schoolArray = {
-        smallerBetter: true,
-        value: [50, 100, 20]
-    };
-
-
-    var dataMarkerArray = {
-        locationArray: ['sengkang', 'bedok', 'SMU'],
-        criteriaValueArray: [
-            priceArray,
-            areaArray,
-            mrtArray,
-            schoolArray
-        ]
-    };
-    /*
-     * To be uncommented when all the parts fall in place...
-     *
-     * var dataMarkerArray = getMarkerDetails();
-     *
+    /*  //Test Case
+     var priceArray = {
+     smallerBetter: true,
+     value: [1000, 2000, 500]
+     };
+     
+     var areaArray = {
+     smallerBetter: false,
+     value: [100, 50, 100]
+     };
+     
+     var mrtArray = {
+     smallerBetter: true,
+     value: [50, 100, 20]
+     };
+     
+     var schoolArray = {
+     smallerBetter: true,
+     value: [50, 100, 20]
+     };
+     
+     
+     var dataMarkerArray = {
+     locationArray: ['sengkang', 'bedok', 'SMU'],
+     criteriaValueArray: [
+     priceArray,
+     areaArray,
+     mrtArray,
+     schoolArray
+     ]
+     };
      */
 
+    //To Be Coded: to take in parameter on how many people...??
 
-    processAHP(dataMarkerArray);
+    if (inputMarker.length <= 0) {
+
+        /*
+         * 
+         * To Be Coded: message to tell  user to add a marker before running AHP
+         * 
+         */
+
+        console.log("No markers on the map");
+        return;
+    }
+
+    var dataMarkerArray = getMarkerDetails();
+    var chosenLocation = processAHP(dataMarkerArray);
+
+    /*
+     * 
+     * To Be Coded: Bounce works, but how to sustain the bounce?
+     * 
+     * Or change marker icon to signal which location is selected??
+     * 
+     */
+
+    for (var i = 0; i < inputMarker.length; i++) {
+        if (inputMarker[i].options.id === chosenLocation) {
+            inputMarker[i].bounce({duration: 1000, height: 100});
+        }
+    }
 }
 
 function addPointSymbolHeatMap(json) {
@@ -768,4 +796,8 @@ function addPointSymbolHeatMap(json) {
         var point = heatMapArray[i];
         pointSymbolHeatMap.addDataPoint(point['lat'], point['lng'], point['size'], point['intensity']);
     }
+}
+
+function test() {
+
 }

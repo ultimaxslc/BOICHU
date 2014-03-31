@@ -37,6 +37,13 @@ function processAHP(dataMarkerArray) {
     console.log("Consistency Ratio: " + consistencyRatio);
 
     if (consistencyRatio > 0.1) {
+        
+        /*
+         * 
+         * To Be Coded: Inform user when consistency ratio signal in
+         * 
+         */
+        
         //alert("Calculated consistency ratio is less than 0.1, results might not be accurate.");
     }
 
@@ -44,7 +51,7 @@ function processAHP(dataMarkerArray) {
     var avgCriteriaArray = new Array();
     //for each criteria
     for (var i = 0; i < criteriaValueArray.length; i++) {
-        //something seems off about the unnormalised and normalised matrices...
+        
         var unnormalisedMatrix = generateUnnormalisedMatrix(criteriaValueArray[i].value, criteriaValueArray[i].smallerBetter);
         var normalisedMatrix = generateNormalisedArray(unnormalisedMatrix);
         var avgCriteria = calculatePiorityMatrix(normalisedMatrix);
@@ -55,10 +62,13 @@ function processAHP(dataMarkerArray) {
 
     var rankedArray = generateRankedArray(avgCriteriaArray, piorityArray);
     var chosenLocation = locationArray[rankedArray.indexOf(Math.max.apply(Math, rankedArray))];
+    
     console.log(chosenLocation);
-
+    console.log(rankedArray);
+    
+    return chosenLocation;
+    /*
     var output = "";
-
 
     for (var i = 0; i < rankedArray.length; i++) {
         output += "" + rankedArray[i] + "<br/>";
@@ -67,6 +77,7 @@ function processAHP(dataMarkerArray) {
     output += "Chosen Location: " + chosenLocation + "<br/>";
 
     $('#output').html(output);
+    */
 
 }
 
@@ -226,10 +237,6 @@ function generateUnnormalisedArray(criteriaArr, intensityArr) {
     }
 
     return unnormalisedArray;
-}
-
-function testmethod() {
-
 }
 
 

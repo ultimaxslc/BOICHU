@@ -1,10 +1,10 @@
 function multiplyMatrix(m1, m2) {
     var result = [];
-    for(var j = 0; j < m2.length; j++) {
+    for (var j = 0; j < m2.length; j++) {
         result[j] = [];
-        for(var k = 0; k < m1[0].length; k++) {
+        for (var k = 0; k < m1[0].length; k++) {
             var sum = 0;
-            for(var i = 0; i < m1.length; i++) {
+            for (var i = 0; i < m1.length; i++) {
                 sum += m1[i][k] * m2[j][i];
             }
             result[j].push(sum);
@@ -46,80 +46,80 @@ function finder(cmp, arr, attr) {
     return val;
 }
 
-function renderFeatureTableFor(feature){
+function renderFeatureTableFor(feature) {
     return '<b>' + feature.properties["Name"] + '</b>';
 }
 
-function renderTransactionDataTableFor(transaction){
-    return "<table class='infopanel'>"+
-    "<tr>"+
-        "<td colspan='2'>"+
-            "<h3 class='projectName' style='text-align:center'>"+
-                transaction['Project Na']
-            +"</h3>"+
-        "</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Address: </td>"+
-        "<td class='valuecell'>"+
+function renderTransactionDataTableFor(transaction) {
+    return "<table class='infopanel'>" +
+            "<tr>" +
+            "<td colspan='2'>" +
+            "<h3 class='projectName' style='text-align:center'>" +
+            transaction['Project Na']
+            + "</h3>" +
+            "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Address: </td>" +
+            "<td class='valuecell'>" +
             transaction['Address']
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Postal Code: </td>"+
-        "<td class='valuecell'>"+
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Postal Code: </td>" +
+            "<td class='valuecell'>" +
             transaction['Postal Cod']
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Type of Area: </td>"+
-        "<td class='valuecell'>"+
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Type of Area: </td>" +
+            "<td class='valuecell'>" +
             transaction['Type of Ar']
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Transacted Price: </td>"+
-        "<td class='valuecell'>"+
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Transacted Price: </td>" +
+            "<td class='valuecell'>" +
             numeral(transaction['Transacted']).format('$0,0.00')
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Area (m<sup>2</sup>): </td>"+
-        "<td class='valuecell'>"+
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Area (m<sup>2</sup>): </td>" +
+            "<td class='valuecell'>" +
             numeral(transaction['Area (sqm)']).format('0,0.0')
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Unit Price (per m<sup>2</sup>): </td>"+
-        "<td class='valuecell'>"+
-        numeral(transaction['Unit Price']).format('$0,0.00')
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Property Type: </td>"+
-        "<td class='valuecell'>"+
-        transaction['Property T']
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Type of Sale: </td>"+
-        "<td class='valuecell'>"+
-        transaction['Type of Sa']
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Planning Region: </td>"+
-        "<td class='valuecell'>"+
-        transaction['Planning R']
-        +"</td>"+
-    "</tr>"+
-    "<tr>"+
-        "<td class='titlecell'>Planning Area: </td>"+
-        "<td class='valuecell'>"+
-        transaction['Planning A']
-        +"</td>"+
-    "</tr>"+
-"</table>"
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Unit Price (per m<sup>2</sup>): </td>" +
+            "<td class='valuecell'>" +
+            numeral(transaction['Unit Price']).format('$0,0.00')
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Property Type: </td>" +
+            "<td class='valuecell'>" +
+            transaction['Property T']
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Type of Sale: </td>" +
+            "<td class='valuecell'>" +
+            transaction['Type of Sa']
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Planning Region: </td>" +
+            "<td class='valuecell'>" +
+            transaction['Planning R']
+            + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td class='titlecell'>Planning Area: </td>" +
+            "<td class='valuecell'>" +
+            transaction['Planning A']
+            + "</td>" +
+            "</tr>" +
+            "</table>"
 }
 
 function pointInPolygon(ploygonArray, lat, lng) {
