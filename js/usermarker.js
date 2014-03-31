@@ -92,11 +92,40 @@ function addUserMarker() {
 }
 
 function getPopUpForm(id, name, price, area) {
-    return "<div><form> \n\
-Name: <input type='text' id ='name" + id + "' name='name' value='" + name + "' oninput=markerChangeDetails(" + id + "); /> <br/> \n\
-Transaction Price: <input type='text' id ='price" + id + "' name='price' value='" + price + "' oninput=markerChangeDetails(" + id + "); /><br/> \n\
-Floor Area: <input type='text' id ='area" + id + "' name='area' value='" + area + "' oninput=markerChangeDetails(" + id + "); /> \n\
-</form></div>";
+//     return "<div><form> \n\
+// Name: <input type='text' id ='name" + id + "' name='name' value='" + name + "' oninput=markerChangeDetails(" + id + "); /> <br/> \n\
+// Transaction Price: <input type='text' id ='price" + id + "' name='price' value='" + price + "' oninput=markerChangeDetails(" + id + "); /><br/> \n\
+// Floor Area: <input type='text' id ='area" + id + "' name='area' value='" + area + "' oninput=markerChangeDetails(" + id + "); /> \n\
+// </form></div>";
+return "<div> \n\
+    <form class='input-choice'> \n\
+        <table> \n\
+            <tr> \n\
+                <td colspan = '2'>\n\
+                    <h4 style='text-align:center'>\n\
+                        Choice " + id + " \n\
+                    </h3>\n\
+                </td> \n\
+            </tr> \n\
+            <tr> \n\
+                <td class='titlecell'>Name:</td> \n\
+                <td class='input-label-field'><input type='text' id='name" + id + "' name='name' value='" + name + "' oninput=markerChangeDetails( " + id + "); /> \n\
+                </td> \n\
+            </tr> \n\
+            <tr> \n\
+                <td class='titlecell'>Transaction Price:</td> \n\
+                <td class='input-label-field'><input type='text' id ='price" + id + "' name='price' value='" + price + "' oninput=markerChangeDetails(" + id + "); /></td> \n\
+            </tr> \n\
+            <tr> \n\
+                <td class='titlecell'>Floor Area:</td> \n\
+                <td class='input-label-field'> \n\
+                    <input type='text' id='area" + id + "' name='area' value='" + area + "' oninput=markerChangeDetails( " + id + "); /> \n\
+                </td> \n\
+            </tr> \n\
+        </table> \n\
+    </form> \n\
+</div> \n\
+" 
 }
 
 function markerChangeDetails(id) {
