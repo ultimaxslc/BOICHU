@@ -128,8 +128,10 @@ function loadScript() {
     $.ajaxSetup({
         async: false
     });
-    $(".loading").remove();
-
+    // $(".loading").remove();
+    $(".genericcontainer").fadeOut(1500, function(){
+        $(".genericcontainer").remove();
+    });
 }
 
 function addPanLayerControl() {
