@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <!--main stylesheet-->
+        <link rel="stylesheet" href="css/main.css" />
+
+        <!--leaflet stylesheet-->
+        <link rel="stylesheet" href="css/leaflet.css" />
+        <link rel="stylesheet" href="css/leafletcontrol/L.Control.Pan.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css" />
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="css/reveal.css" />
+        <link rel="stylesheet" href="css/avgrund.css"/>
+        <!--[if lte IE8]>
+            <link rel="stylesheet" href=css/leaflet.ie.css"/>
+            <![endif]-->
+        <!--libraries-->
+        <script src="js/leaflet.js"></script>
+        <script src="js/L.Control.Pan.js"></script>
+        <script src='js/jquery-1.11.0.js'></script>
+        <script src='js/jquery-migrate.js'></script>
+        <script src="js/leaflet-google.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="js/TileLayer.Grayscale.js"></script>
+        <script src="js/heatcanvas.js"></script>
+        <script src="js/heatcanvas-leaflet.js"></script>
+        <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtDPnT0d7d8mKYnkua06UZzDgksNIo8A&sensor=true'></script>
+        <script type="text/javascript" src="js/jquery.reveal.js"></script>
+        <script type="text/javascript" src="js/webgl-heatmap.js"></script>
+        <script type="text/javascript" src="js/webgl-heatmap-leaflet.js"></script>
+        <script type="text/javascript" src="js/shCore.js"></script>
+        <script type="text/javascript" src="js/shBrushJScript.js"></script>
+        <script src="js/underscore.js"></script>
+        <script src="js/numeral.js"></script>
+        <script type="text/javascript" src="js/bouncemarker.js"></script>
+
+        <!--link to main javascript file-->
+        <script src="js/utility.js"></script>
+        <script src="js/ahp.js"></script>
+        <script type="text/javascript" src="js/avgrund.js"></script>
+        <script type="text/javascript" src="js/jquery.avgrund.js"></script> 
+        <script src="js/usermarker.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            window.onload = loadScript;
+        </script>
+    </head>
+
+    <body>
+        <div class="loading">
+            <img src="img/loading.gif" />
+        </div>
+        <div id="map" class="leaflet-fade-anim" />
+
+        <div id="myModal" class="reveal-modal">
+            <form>
+                Price <input type="radio" value="1" name="crit[0]" checked> vs. Floor Area <input type="radio" value="2" name="crit[0]"><br/>
+
+                1 <input type="radio" name="intensity[0]" value="1" checked> 
+                2 <input type="radio" name="intensity[0]" value="2"> 
+                3 <input type="radio" name="intensity[0]" value="3"> 
+                4 <input type="radio" name="intensity[0]" value="4"> 
+                5 <input type="radio" name="intensity[0]" value="5"> 
+                <br/><br/>
+
+                Price <input type="radio" value="1" name="crit[1]" checked> vs Distance to MRT <input type="radio" value="2" name="crit[1]"><br/>
+
+                1 <input type="radio" name="intensity[1]" value="1" checked> 
+                2 <input type="radio" name="intensity[1]" value="2"> 
+                3 <input type="radio" name="intensity[1]" value="3"> 
+                4 <input type="radio" name="intensity[1]" value="4"> 
+                5 <input type="radio" name="intensity[1]" value="5"> 
+                <br/><br/>
+
+                Price <input type="radio" value="1" name="crit[2]" checked> vs Distance to School <input type="radio" value="2" name="crit[2]"><br/>
+
+                1 <input type="radio" name="intensity[2]" value="1" checked> 
+                2 <input type="radio" name="intensity[2]" value="2"> 
+                3 <input type="radio" name="intensity[2]" value="3"> 
+                4 <input type="radio" name="intensity[2]" value="4"> 
+                5 <input type="radio" name="intensity[2]" value="5"> 
+                <br/><br/>
+
+                Floor Area <input type="radio" value="1" name="crit[3]" checked> vs Distance to MRT <input type="radio" value="2" name="crit[3]"><br/>
+
+                1 <input type="radio" name="intensity[3]" value="1" checked> 
+                2 <input type="radio" name="intensity[3]" value="2"> 
+                3 <input type="radio" name="intensity[3]" value="3"> 
+                4 <input type="radio" name="intensity[3]" value="4"> 
+                5 <input type="radio" name="intensity[3]" value="5"> 
+                <br/><br/>
+
+                Floor Area <input type="radio" value="1" name="crit[4]" checked> vs Distance to School <input type="radio" value="2" name="crit[4]"><br/>
+
+                1 <input type="radio" name="intensity[4]" value="1" checked> 
+                2 <input type="radio" name="intensity[4]" value="2"> 
+                3 <input type="radio" name="intensity[4]" value="3"> 
+                4 <input type="radio" name="intensity[4]" value="4"> 
+                5 <input type="radio" name="intensity[4]" value="5"> 
+                <br/><br/>
+
+                Distance to MRT <input type="radio" value="1" name="crit[5]" checked> vs Distance to School <input type="radio" value="2" name="crit[5]"><br/>
+
+                1 <input type="radio" name="intensity[5]" value="1" checked> 
+                2 <input type="radio" name="intensity[5]" value="2"> 
+                3 <input type="radio" name="intensity[5]" value="3"> 
+                4 <input type="radio" name="intensity[5]" value="4"> 
+                5 <input type="radio" name="intensity[5]" value="5"> 
+                <br/><br/>
+            </form>
+
+            <button type="button" onclick="runAHP();">Run AHP</button>
+
+            <div id="output">
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
+        </div>
+    </body>
+
+</html>
