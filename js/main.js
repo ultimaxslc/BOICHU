@@ -762,7 +762,15 @@ function runAHP() {
     }
 
     var dataMarkerArray = getMarkerDetails();
-    var chosenLocation = processAHP(dataMarkerArray);
+    
+    
+    /*
+     * 
+     * processAHP Changed, last parameter takes either 1 or 2 representing number of players for AHP
+     * 
+     */
+    
+    var chosenLocation = processAHP(dataMarkerArray,1);
 
     /*
      * 

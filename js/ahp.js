@@ -7,43 +7,32 @@
 var numcriteria = 4;
 var consistencyTable = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49];
 
-function processAHP(dataMarkerArray) {
+function processAHP(dataMarkerArray, numOfPlayer) {
     var locationArray = dataMarkerArray.locationArray;
     var criteriaValueArray = dataMarkerArray.criteriaValueArray;
 
+    var combineArray;
 
-    //Step 0: get user input
-    var crit = new Array();
-    var intensity = new Array();
+    if (numOfPlayer === 2) {
+        combineArray = getUserCriteria2();
+    } else {
+        combineArray = getUserCriteria();
+    }
 
-
-    $('input[name^=crit]:checked').each(function() {
-        crit.push(parseFloat(this.value));
-    });
-
-    $('input[name^=intensity]:checked').each(function() {
-        intensity.push(parseFloat(this.value));
-    });
-
-
-    //Step 1: get Piority Matrix (Calculation to follow BPMSG, the squared matrix method) <- TO CHANGE THE BELOW)
-    var unnormalisedArray = generateUnnormalisedArray(crit, intensity);
-    //var squaredMatrix = multiplyMatrix(unnormalisedArray, unnormalisedArray);
-    var normalisedArray = generateNormalisedArray(unnormalisedArray);
-    var piorityArray = calculatePiorityMatrix(normalisedArray);
+    var piorityArray = calculatePiorityMatrix(combineArray[1]);
 
     //Step 1B: calculate Consistency Ratio
-    var consistencyRatio = calculateConsistencyRatio(unnormalisedArray, piorityArray);
+    var consistencyRatio = calculateConsistencyRatio(combineArray[0], piorityArray);
     console.log("Consistency Ratio: " + consistencyRatio);
 
     if (consistencyRatio > 0.1) {
-        
+
         /*
          * 
          * To Be Coded: Inform user when consistency ratio signal in
          * 
          */
-        
+
         //alert("Calculated consistency ratio is less than 0.1, results might not be accurate.");
     }
 
@@ -51,7 +40,7 @@ function processAHP(dataMarkerArray) {
     var avgCriteriaArray = new Array();
     //for each criteria
     for (var i = 0; i < criteriaValueArray.length; i++) {
-        
+
         var unnormalisedMatrix = generateUnnormalisedMatrix(criteriaValueArray[i].value, criteriaValueArray[i].smallerBetter);
         var normalisedMatrix = generateNormalisedArray(unnormalisedMatrix);
         var avgCriteria = calculatePiorityMatrix(normalisedMatrix);
@@ -62,12 +51,10 @@ function processAHP(dataMarkerArray) {
 
     var rankedArray = generateRankedArray(avgCriteriaArray, piorityArray);
     var chosenLocation = locationArray[rankedArray.indexOf(Math.max.apply(Math, rankedArray))];
-    
+
     console.log(chosenLocation);
     console.log(rankedArray);
-    
-    return chosenLocation;
-    /*
+
     var output = "";
 
     for (var i = 0; i < rankedArray.length; i++) {
@@ -77,8 +64,8 @@ function processAHP(dataMarkerArray) {
     output += "Chosen Location: " + chosenLocation + "<br/>";
 
     $('#output').html(output);
-    */
 
+    return chosenLocation;
 }
 
 function generateRankedArray(avgCriteriaArray, piorityArray) {
@@ -240,3 +227,146 @@ function generateUnnormalisedArray(criteriaArr, intensityArr) {
 }
 
 
+
+function runTestAHP() {
+    var dataMarkerArray = getTestData();
+    var chosenLocation = processAHP(dataMarkerArray, 2);
+
+    console.log(chosenLocation);
+}
+
+function getTestData() {
+    var priceArray = {
+        smallerBetter: true,
+        value: [1000, 2000, 500]
+    };
+
+    var areaArray = {
+        smallerBetter: false,
+        value: [100, 50, 100]
+    };
+
+    var mrtArray = {
+        smallerBetter: true,
+        value: [50, 100, 20]
+    };
+
+    var schoolArray = {
+        smallerBetter: true,
+        value: [50, 100, 20]
+    };
+
+
+    var dataMarkerArray = {
+        locationArray: ['sengkang', 'bedok', 'SMU'],
+        criteriaValueArray: [
+            priceArray,
+            areaArray,
+            mrtArray,
+            schoolArray
+        ]
+    };
+
+    return dataMarkerArray;
+}
+
+function getUserCriteria2() {
+    var crit_1 = new Array();
+    var intensity_1 = new Array();
+
+    var crit_2 = new Array();
+    var intensity_2 = new Array();
+
+
+    $('input[name^=crit]:checked').each(function() {
+        crit_1.push(parseFloat(this.value));
+    });
+
+    $('input[name^=intensity]:checked').each(function() {
+        intensity_1.push(parseFloat(this.value));
+    });
+
+    $('input[name^=crit2]:checked').each(function() {
+        crit_2.push(parseFloat(this.value));
+    });
+
+    $('input[name^=intensity2]:checked').each(function() {
+        intensity_2.push(parseFloat(this.value));
+    });
+
+
+    var unnormalisedArray_1 = generateUnnormalisedArray(crit_1, intensity_1);
+    var normalisedArray_1 = generateNormalisedArray(unnormalisedArray_1);
+
+
+    var unnormalisedArray_2 = generateUnnormalisedArray(crit_2, intensity_2);
+    var normalisedArray_2 = generateNormalisedArray(unnormalisedArray_2);
+
+    var overallNoramlisedArray = averageOutArray(normalisedArray_2, normalisedArray_1);
+    var overallUnnormalisedArray = reunnormaliseArray(overallNoramlisedArray);
+
+    var returnArray = [overallUnnormalisedArray, overallNoramlisedArray];
+
+    return returnArray;
+}
+
+function getUserCriteria() {
+    //Step 0: get user input
+    var crit = new Array();
+    var intensity = new Array();
+
+
+    $('input[name^=crit]:checked').each(function() {
+        crit.push(parseFloat(this.value));
+    });
+
+    $('input[name^=intensity]:checked').each(function() {
+        intensity.push(parseFloat(this.value));
+    });
+
+
+    //Step 1: get Piority Matrix 
+    var unnormalisedArray = generateUnnormalisedArray(crit, intensity);
+    var normalisedArray = generateNormalisedArray(unnormalisedArray);
+
+    var returnArray = [unnormalisedArray, normalisedArray];
+
+    return returnArray;
+}
+
+function averageOutArray(array1, array2) {
+
+    var overallArray = new Array();
+
+    for (var i = 0; i < array1.length; i++) {
+        overallArray[i] = new Array();
+        for (var j = 0; j < array1[i].length; j++) {
+            overallArray[i][j] = (array1[i][j] + array2[i][j]) / 2;
+        }
+    }
+
+    return overallArray;
+}
+
+function reunnormaliseArray(normalisedArray) {
+
+    var factorArray = new Array();
+    var unnormalisedArray = new Array();
+    var total = 0;
+    
+    for (var i = 0; i < normalisedArray.length; i++) {
+        factorArray.push(1 / normalisedArray[i][i]);
+        unnormalisedArray[i] = new Array();
+    }
+
+    for (var j = 0; j < normalisedArray[0].length; j++) {
+        for (var i = 0; i < normalisedArray.length; i++) {
+            unnormalisedArray[i][j] = normalisedArray[i][j] * factorArray[j];
+            total += normalisedArray[i][j];
+        }
+
+        total = 0;
+    }
+
+    return unnormalisedArray;
+}

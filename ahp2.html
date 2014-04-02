@@ -1,0 +1,122 @@
+<head>
+    <script src="js/utility.js"></script>
+    <script src="js/ahp.js"></script>
+    <script src='js/jquery-1.11.0.js'></script>
+</head>
+<body>
+    <form>
+        Player 1: <br/>
+        Price <input type="radio" value="1" name="crit[0]" checked> vs. Floor Area <input type="radio" value="2" name="crit[0]"><br/>
+
+        1 <input type="radio" name="intensity[0]" value="1"> 
+        2 <input type="radio" name="intensity[0]" value="2"> 
+        3 <input type="radio" name="intensity[0]" value="3"> 
+        4 <input type="radio" name="intensity[0]" value="4"> 
+        5 <input type="radio" name="intensity[0]" value="5" checked> 
+        <br/><br/>
+
+        Price <input type="radio" value="1" name="crit[1]" checked> vs Distance to MRT <input type="radio" value="2" name="crit[1]"><br/>
+
+        1 <input type="radio" name="intensity[1]" value="1"> 
+        2 <input type="radio" name="intensity[1]" value="2"> 
+        3 <input type="radio" name="intensity[1]" value="3"> 
+        4 <input type="radio" name="intensity[1]" value="4"> 
+        5 <input type="radio" name="intensity[1]" value="5" checked> 
+        <br/><br/>
+
+        Price <input type="radio" value="1" name="crit[2]" checked> vs Distance to School <input type="radio" value="2" name="crit[2]"><br/>
+
+        1 <input type="radio" name="intensity[2]" value="1"> 
+        2 <input type="radio" name="intensity[2]" value="2"> 
+        3 <input type="radio" name="intensity[2]" value="3"> 
+        4 <input type="radio" name="intensity[2]" value="4"> 
+        5 <input type="radio" name="intensity[2]" value="5" checked> 
+        <br/><br/>
+
+        Floor Area <input type="radio" value="1" name="crit[3]" checked> vs Distance to MRT <input type="radio" value="2" name="crit[3]"><br/>
+
+        1 <input type="radio" name="intensity[3]" value="1"> 
+        2 <input type="radio" name="intensity[3]" value="2"> 
+        3 <input type="radio" name="intensity[3]" value="3"> 
+        4 <input type="radio" name="intensity[3]" value="4" checked> 
+        5 <input type="radio" name="intensity[3]" value="5"> 
+        <br/><br/>
+
+        Floor Area <input type="radio" value="1" name="crit[4]" checked> vs Distance to School <input type="radio" value="2" name="crit[4]"><br/>
+
+        1 <input type="radio" name="intensity[4]" value="1"> 
+        2 <input type="radio" name="intensity[4]" value="2"> 
+        3 <input type="radio" name="intensity[4]" value="3"> 
+        4 <input type="radio" name="intensity[4]" value="4" checked> 
+        5 <input type="radio" name="intensity[4]" value="5"> 
+        <br/><br/>
+
+        Distance to MRT <input type="radio" value="1" name="crit[5]" checked> vs Distance to School <input type="radio" value="2" name="crit[5]"><br/>
+
+        1 <input type="radio" name="intensity[5]" value="1"> 
+        2 <input type="radio" name="intensity[5]" value="2"> 
+        3 <input type="radio" name="intensity[5]" value="3" checked> 
+        4 <input type="radio" name="intensity[5]" value="4"> 
+        5 <input type="radio" name="intensity[5]" value="5"> 
+        <br/><br/>
+        <br/>
+        Player 2:<br/>
+        Price <input type="radio" value="1" name="crit2[0]" checked> vs. Floor Area <input type="radio" value="2" name="crit2[0]"><br/>
+
+        1 <input type="radio" name="intensity2[0]" value="1"> 
+        2 <input type="radio" name="intensity2[0]" value="2"> 
+        3 <input type="radio" name="intensity2[0]" value="3"> 
+        4 <input type="radio" name="intensity2[0]" value="4"> 
+        5 <input type="radio" name="intensity2[0]" value="5" checked> 
+        <br/><br/>
+
+        Price <input type="radio" value="1" name="crit2[1]" checked> vs Distance to MRT <input type="radio" value="2" name="crit2[1]"><br/>
+
+        1 <input type="radio" name="intensity2[1]" value="1"> 
+        2 <input type="radio" name="intensity2[1]" value="2"> 
+        3 <input type="radio" name="intensity2[1]" value="3"> 
+        4 <input type="radio" name="intensity2[1]" value="4"> 
+        5 <input type="radio" name="intensity2[1]" value="5" checked> 
+        <br/><br/>
+
+        Price <input type="radio" value="1" name="crit2[2]" checked> vs Distance to School <input type="radio" value="2" name="crit2[2]"><br/>
+
+        1 <input type="radio" name="intensity2[2]" value="1"> 
+        2 <input type="radio" name="intensity2[2]" value="2"> 
+        3 <input type="radio" name="intensity2[2]" value="3"> 
+        4 <input type="radio" name="intensity2[2]" value="4"> 
+        5 <input type="radio" name="intensity2[2]" value="5" checked> 
+        <br/><br/>
+
+        Floor Area <input type="radio" value="1" name="crit2[3]" checked> vs Distance to MRT <input type="radio" value="2" name="crit2[3]"><br/>
+
+        1 <input type="radio" name="intensity2[3]" value="1"> 
+        2 <input type="radio" name="intensity2[3]" value="2"> 
+        3 <input type="radio" name="intensity2[3]" value="3"> 
+        4 <input type="radio" name="intensity2[3]" value="4" checked> 
+        5 <input type="radio" name="intensity2[3]" value="5"> 
+        <br/><br/>
+
+        Floor Area <input type="radio" value="1" name="crit2[4]" checked> vs Distance to School <input type="radio" value="2" name="crit2[4]"><br/>
+
+        1 <input type="radio" name="intensity2[4]" value="1"> 
+        2 <input type="radio" name="intensity2[4]" value="2"> 
+        3 <input type="radio" name="intensity2[4]" value="3"> 
+        4 <input type="radio" name="intensity2[4]" value="4" checked> 
+        5 <input type="radio" name="intensity2[4]" value="5"> 
+        <br/><br/>
+
+        Distance to MRT <input type="radio" value="1" name="crit2[5]" checked> vs Distance to School <input type="radio" value="2" name="crit2[5]"><br/>
+
+        1 <input type="radio" name="intensity2[5]" value="1"> 
+        2 <input type="radio" name="intensity2[5]" value="2"> 
+        3 <input type="radio" name="intensity2[5]" value="3" checked> 
+        4 <input type="radio" name="intensity2[5]" value="4"> 
+        5 <input type="radio" name="intensity2[5]" value="5"> 
+    </form>
+
+    <button type="button" onclick="runTestAHP();">Run AHP</button>
+
+    <div id="output">
+    </div>
+</body>
