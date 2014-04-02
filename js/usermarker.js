@@ -22,9 +22,23 @@ function addUserMarkerControl() {
         return this._div;
     };
     userInputControl.userInputOn = function() {
-        this._div.innerHTML = '<div id="toggle" onclick="addUserMarker()">Add Marker</div>';
+        this._div.innerHTML = '<div id="default-popup"  onclick="addUserMarker()">Add Marker</div>';
     };
-
+    
+    // on the fourth click, i want the same button (Add Marker) to trigger the popup
+    userInputControl.popupOn = function(){
+        openDialog();
+        var htmlOutput ="";
+        htmlOutput += '<aside id="default-popup" class="avgrund-popup">';
+        htmlOutput += '<h2>OOPS</h2>';
+        htmlOutput += '<p>To help you make a better decision, you can only choose 3 locations! You can hit ESC or click outside to close the modal. Give it a go to see the reverse transition.</p>';
+        
+        htmlOutput +=  '<button onclick="javascript:closeDialog();">Close</button></aside>';
+        //temp = document.getElementById("toggle");
+        //temp.click().openDialog();
+        this._div.innerHTML = htmlOutput;
+    };
+    
     map.addControl(userInputControl);
 
     ahpControl = L.control({position: 'topright'});
@@ -43,6 +57,15 @@ function addUserMarkerControl() {
 
     map.addControl(ahpControl);
 
+}
+
+// Create avgrund popup
+function openDialog() {
+    Avgrund.show("#default-popup" );
+}
+function closeDialog() {
+    Avgrund.hide();
+    userInputControl.userInputOn ();
 }
 
 function getAHPForm() {
@@ -64,7 +87,7 @@ function addUserMarker() {
 
     if (inputMarker.length >= 3) {
         //insert some code to stop user from adding more markers
-        alert("There are already 3 markers on map!");
+        userInputControl.popupOn();
         return;
     }
 

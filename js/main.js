@@ -757,7 +757,7 @@ function runAHP() {
          * 
          */
 
-        console.log("No markers on the map");
+        alert("No markers on the map");
         return;
     }
 
