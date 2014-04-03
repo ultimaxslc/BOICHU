@@ -278,33 +278,33 @@ function getUserCriteria2() {
     var intensity_2 = new Array();
 
 
-    $('input[name^=crit]:checked').each(function() {
+    $('input[name^=multi-crit-1player]:checked').each(function() {
         crit_1.push(parseFloat(this.value));
     });
 
-    $('input[name^=intensity]:checked').each(function() {
+    $('input[name^=multi-intensity-1player]:checked').each(function() {
         intensity_1.push(parseFloat(this.value));
     });
 
-    $('input[name^=crit2]:checked').each(function() {
+    $('input[name^=multi-crit-2player]:checked').each(function() {
         crit_2.push(parseFloat(this.value));
     });
 
-    $('input[name^=intensity2]:checked').each(function() {
+    $('input[name^=multi-intensity-2player]:checked').each(function() {
         intensity_2.push(parseFloat(this.value));
     });
 
 
     var unnormalisedArray_1 = generateUnnormalisedArray(crit_1, intensity_1);
     var normalisedArray_1 = generateNormalisedArray(unnormalisedArray_1);
-
+    
 
     var unnormalisedArray_2 = generateUnnormalisedArray(crit_2, intensity_2);
     var normalisedArray_2 = generateNormalisedArray(unnormalisedArray_2);
 
     var overallNoramlisedArray = averageOutArray(normalisedArray_2, normalisedArray_1);
     var overallUnnormalisedArray = reunnormaliseArray(overallNoramlisedArray);
-
+     
     var returnArray = [overallUnnormalisedArray, overallNoramlisedArray];
 
     return returnArray;
@@ -328,7 +328,7 @@ function getUserCriteria() {
     //Step 1: get Piority Matrix 
     var unnormalisedArray = generateUnnormalisedArray(crit, intensity);
     var normalisedArray = generateNormalisedArray(unnormalisedArray);
-
+    
     var returnArray = [unnormalisedArray, normalisedArray];
 
     return returnArray;

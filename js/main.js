@@ -25,7 +25,7 @@ function loadScript() {
         attribution: '&copy; ' + '<a href="http://openstreetmap.org">OpenStreetMap</a>' + ' Contributors'
     });
     var baseMaps = {
-        'Open Street Map' : osmMap,
+        'Open Street Map' : osmMap
         // 'Open Street Maps (B/W)': openStreeMapLayer,
         // 'Google (Satellite)': googleLayerSatellite,
         // 'Google (Street)': googleLayerStreet,
@@ -48,60 +48,60 @@ function loadScript() {
     schoolsLayer = L.layerGroup();
 
     //loading of property transaction data
-    // $.getJSON('data/realis.geojson', function(data) {
-    //     jsonArray = data;
+     $.getJSON('data/realis.geojson', function(data) {
+         jsonArray = data;
 
-    //     //treat the data according to marker cluster
-    //     addMarkerCluster(jsonArray);
-    //     //treat the data according to heatmap
-    //     addHeatMapLayer(jsonArray, 'Transacted');
-    //     //treat the data according to point symbols
-    //     addPointSymbolMap(jsonArray, 'Property T');
-    //     addPointSymbolHeatMap(jsonArray);
+         //treat the data according to marker cluster
+         addMarkerCluster(jsonArray);
+         //treat the data according to heatmap
+         addHeatMapLayer(jsonArray, 'Transacted');
+         //treat the data according to point symbols
+         addPointSymbolMap(jsonArray, 'Property T');
+         addPointSymbolHeatMap(jsonArray);
 
-    //     $.getJSON('data/Polygon.geojson', function(polygonData) {
-    //         boundaryArray = polygonData;
-    //         setChoroplethLayer(boundaryArray, jsonArray, 'Average Price Area');
-    //         //addProportionateSymbolMap(boundaryArray);
-    //     });
-
-
-    //     $.getJSON('data/PolygonCentroid.geojson', function(polygonCentroidData) {
-    //         addProportionateSymbolMap(polygonCentroidData, boundaryArray, 'Number Of Transactions');
-    //     });
-
-    // });
+         $.getJSON('data/Polygon.geojson', function(polygonData) {
+             boundaryArray = polygonData;
+             setChoroplethLayer(boundaryArray, jsonArray, 'Average Price Area');
+             //addProportionateSymbolMap(boundaryArray);
+         });
 
 
-    // $.getJSON('data/sgmrtstations.geojson', function(stationData) {
-    //     // $.getJSON('data/sgrailnetwork.geojson', function(railData) {
-    //     //     addMRTStationMap(stationData, railData);
-    //     // });
-    //     railData = [];
-    //     $.getJSON('data/NSLine.geojson', function(NSLineData) {
-    //         railData.push(NSLineData)
-    //     });
-    //     $.getJSON('data/EWLine.geojson', function(EWLineData) {
-    //         railData.push(EWLineData)
-    //     });
-    //     $.getJSON('data/NELine.geojson', function(NELineData) {
-    //         railData.push(NELineData)
-    //     });
-    //     $.getJSON('data/DowntownLine.geojson', function(DowntownLineData) {
-    //         railData.push(DowntownLineData)
-    //     });
-    //     $.getJSON('data/CircleLine.geojson', function(CircleLineData) {
-    //         railData.push(CircleLineData)
-    //     });
-    //     addMRTStationMap(stationData, railData);
-    // });
+         $.getJSON('data/PolygonCentroid.geojson', function(polygonCentroidData) {
+             addProportionateSymbolMap(polygonCentroidData, boundaryArray, 'Number Of Transactions');
+         });
 
-    // $.getJSON('data/Stadiums.geojson', function(stadiumData) {
-    //     addStadiumMap(stadiumData);
-    // });
-    // $.getJSON('data/Schools.geojson', function(schoolData) {
-    //     addSchoolsMap(schoolData);
-    // });
+     });
+
+
+     $.getJSON('data/sgmrtstations.geojson', function(stationData) {
+         // $.getJSON('data/sgrailnetwork.geojson', function(railData) {
+         //     addMRTStationMap(stationData, railData);
+         // });
+         railData = [];
+         $.getJSON('data/NSLine.geojson', function(NSLineData) {
+             railData.push(NSLineData);
+         });
+         $.getJSON('data/EWLine.geojson', function(EWLineData) {
+             railData.push(EWLineData);
+         });
+         $.getJSON('data/NELine.geojson', function(NELineData) {
+             railData.push(NELineData);
+         });
+         $.getJSON('data/DowntownLine.geojson', function(DowntownLineData) {
+             railData.push(DowntownLineData);
+         });
+         $.getJSON('data/CircleLine.geojson', function(CircleLineData) {
+             railData.push(CircleLineData);
+         });
+         addMRTStationMap(stationData, railData);
+     });
+
+     $.getJSON('data/Stadiums.geojson', function(stadiumData) {
+         addStadiumMap(stadiumData);
+     });
+     $.getJSON('data/Schools.geojson', function(schoolData) {
+         addSchoolsMap(schoolData);
+     });
 
 
     /*
@@ -112,15 +112,15 @@ function loadScript() {
      */
 
     var overlayMaps = {
-    //     'Cluster Marker': markersCluster,
-    //     'Point Symbol': PointSymbolMap,
-    //     'Transacted Price Heat Map': transactedPriceHeatMap,
-    //     'Heat Map': pointSymbolHeatMap,
-    //     'MRT Map': mrtMapLayerReference,
-    //     'Singapore Sub Zones': polygonBoundary,
-    //     'Proportional Symbol': proportionalSymbolMap,
-    //     'Schools': schoolsLayer,
-    //     'Stadiums': stadiumsLayer
+         'Cluster Marker': markersCluster,
+         'Point Symbol': PointSymbolMap,
+         'Transacted Price Heat Map': transactedPriceHeatMap,
+         'Heat Map': pointSymbolHeatMap,
+         'MRT Map': mrtMapLayerReference,
+         'Singapore Sub Zones': polygonBoundary,
+         'Proportional Symbol': proportionalSymbolMap,
+         'Schools': schoolsLayer,
+         'Stadiums': stadiumsLayer
     };
 
     map.addLayer(osmMap);
@@ -128,9 +128,9 @@ function loadScript() {
     layerControl = L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(map);
-    renderChoroplethVariableControl()
-    // addLayerChangeEventHandler();
-    // addPanLayerControl();
+    renderChoroplethVariableControl();
+    addLayerChangeEventHandler();
+    addPanLayerControl();
     addUserMarkerControl();
     applyAHPFormEffect();
 
@@ -147,7 +147,7 @@ function loadScript() {
 function addPanLayerControl() {
     panLayerControl = L.control.pan({
         position: "topleft"
-    }).addTo(map)
+    }).addTo(map);
 }
 
 function applyAHPFormEffect() {
@@ -160,8 +160,8 @@ function applyAHPFormEffect() {
     });
 
     $('#mode-switch-dual').click(function() {
-        isSinglePlayerMode = false;
-        if (!isSinglePlayerMode) {
+        if (isSinglePlayerMode) {
+            isSinglePlayerMode = false;
             $('#two-player-mode').toggle();
             $('#single-player-mode').toggle();
         }
