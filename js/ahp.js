@@ -26,15 +26,25 @@ function processAHP(dataMarkerArray, numOfPlayer) {
     consistencyRatio = calculateConsistencyRatio(combineArray[0], piorityArray);
     console.log("Consistency Ratio: " + consistencyRatio);
 
+    $('.mode-toggle').hide();
     $('#two-player-mode').hide();
     $('#single-player-mode').hide();
     $('#ahp-output').show();
+
+    var bannerContent = '<h1 style="font-variant:small-caps;font-size:2.25em;color:#fff;text-align:center">Recommendation</h2>';
+    var banner = $('<div/>', {
+        id: 'bannerId',
+        class: 'bruceBanner',
+        html: bannerContent
+    });
+    $('#ahp-output').append(banner);
+
     if (consistencyRatio > 0.1) {
         //alert("Calculated consistency ratio is less than 0.1, results might not be accurate.");
         var alertContent = '<h4 style="font-style:italic; color:#b83d80">Calculated consistency ratio is less than 0.1, results might not be accurate.</h4>';
         var consistencyAlert = $('<div/>', {
             id: 'consistencyAlert',
-            classname: 'consistencyAlert',
+            class: 'consistencyAlert',
             html:alertContent
         });
         $('#ahp-output').append(consistencyAlert);
@@ -59,15 +69,69 @@ function processAHP(dataMarkerArray, numOfPlayer) {
     console.log(chosenLocation);
     console.log(rankedArray);
 
+    for(var i = 0; i<inputMarker.length; i++){
+        inputMarker[i].options.ahpOutput = rankedArray[i];
+    }
+
+
     var output = "";
 
     for (var i = 0; i < rankedArray.length; i++) {
         output += "" + rankedArray[i] + "<br/>";
     }
 
-    output += "Chosen Location: " + chosenLocation + "<br/>";
+    // output += "Chosen Location: " + chosenLocation + "<br/>";
 
-    $('#output').html(output);
+    // $('#output').html(output);
+    var theResultantDetails;
+
+    for (var i = 0; i < inputMarker.length; i++) {
+        if (inputMarker[i].options.id === chosenLocation) {
+            theResultantDetails = inputMarker[i].options;
+        }
+    }
+    
+    var resultContent = '<p style="color:#3f3f3f; font-size:3em; font-weight:bold; margin:0px;">'+ theResultantDetails.name +'</h1><br/>'+
+        '<p class="resultText" style="color:#3f3f3f; font-size:1.5em; margin:0px;">' +
+            'with a rank score of ' + numeral(theResultantDetails.ahpOutput).format('0.000') +
+            ', transaction price of ' + numeral(theResultantDetails.price).format('$0,0') +
+            ' and a floor area of ' +
+            numeral(theResultantDetails.area).format('0,0') + 
+            'm<sup>2</sup>.'+
+        '</p> ' +
+        '<hr noshade/>';
+    var resultLoad = $('<div/>', {
+            id: 'ahp-result',
+            class: 'ahp-results',
+            html:resultContent
+        });
+    $('#ahp-output').append(resultLoad);
+
+    //get all the non-recommendations
+    var nonRecs = [];
+    _.each(inputMarker, function(currentMarker){
+        if (currentMarker.options.id != chosenLocation){
+            nonRecs.push(currentMarker);
+        }
+    })
+    //loop and add to ul li
+    var listContent = '<p style="color:#3f3f3f; font-size:1.2em; margin:0px;">Other alternatives in order of recommendation</p><ol>';
+    _.each(nonRecs, function(currentNonRec){
+        listContent += '<li>';
+        listContent += currentNonRec.options.name;
+        listContent += '<ul><li>Rank Score ';
+        listContent += numeral(currentNonRec.options.ahpOutput).format('0.000');
+        listContent += '</li></ul>';
+        listContent += '</li>';
+    });
+    listContent += '</ol>';
+
+    var listObject = "<div>" + listContent + "</div>";
+
+
+    //append the whole list as jquery object
+    // $('#ahp-output').append(listContent);
+    $('#ahp-output').append(listObject);
 
     return chosenLocation;
 }

@@ -376,5 +376,9 @@ input[type="radio"]:checked + .switch--off {
     top:1px;
 }
 
+.bruceBanner{
+    width:100%;
+    background-color: #d35400;
+}
 
 
