@@ -127,20 +127,20 @@ return "<div> \n\
                 <td colspan = '2'>\n\
                     <h4 style='text-align:center'>\n\
                         Choice " + id + " \n\
-                    </h3>\n\
+                    </h4>\n\
                 </td> \n\
             </tr> \n\
             <tr> \n\
-                <td class='titlecell'>Name:</td> \n\
+                <td class='titlecell' style='width:85%'>Name: </td> \n\
                 <td class='input-label-field'><input type='text' id='name" + id + "' name='name' value='" + name + "' oninput=markerChangeDetails(" + id + "); /> \n\
                 </td> \n\
             </tr> \n\
             <tr> \n\
-                <td class='titlecell'>Transaction Price:</td> \n\
+                <td class='titlecell' style='width:85%'>Price (SGD): </td> \n\
                 <td class='input-label-field'><input type='text' id ='price" + id + "' name='price' value='" + price + "' oninput=markerChangeDetails(" + id + "); /></td> \n\
             </tr> \n\
             <tr> \n\
-                <td class='titlecell'>Floor Area:</td> \n\
+                <td class='titlecell' style='width:85%'>Floor Area (m<sup>2</sup>): </td> \n\
                 <td class='input-label-field'> \n\
                     <input type='text' id='area" + id + "' name='area' value='" + area + "' oninput=markerChangeDetails(" + id + "); /> \n\
                 </td> \n\
