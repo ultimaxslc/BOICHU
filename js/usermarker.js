@@ -61,11 +61,11 @@ function addUserMarkerControl() {
 
 // Create avgrund popup
 function openDialog() {
-    Avgrund.show("#default-popup" );
+    Avgrund.show("#default-popup");
 }
 function closeDialog() {
     Avgrund.hide();
-    userInputControl.userInputOn ();
+    userInputControl.userInputOn();
 }
 
 function getAHPForm() {

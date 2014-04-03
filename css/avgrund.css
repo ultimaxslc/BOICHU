@@ -53,13 +53,13 @@
 	}
 
 .avgrund-popup {
-	// position: absolute;
-	width: 340px;
-	height: 180px;
-	left: 50%;
+	position: fixed;
+	width: 640px;
+	height: 280px;
+	left: 37.5%;
 	top: 50%;
-	margin: -130px 0 0 -190px;
-	// visibility: hidden;
+	margin: -130px 0 0 -130px;
+	/*visibility: hidden;*/
 	opacity: 100;
 	z-index: 100;
 	padding: 20px;
@@ -73,6 +73,11 @@
 	    -ms-transform: scale( 0.8 );
 	     -o-transform: scale( 0.8 );
 	        transform: scale( 0.8 );
+
+	font-size:1.75em;
+	line-height: 1.5em;
+	text-align: center;
+
 }
 	.avgrund-active .avgrund-popup-animate {
 		visibility: visible;

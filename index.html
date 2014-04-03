@@ -188,7 +188,7 @@
                 </p>
 
 
-                <button type="button" onclick="runAHP();">Run AHP</button>
+                <button type="button" onclick="runAHP(1);">Run AHP</button>
             </form>
 
             <div id="output">
@@ -198,74 +198,74 @@
 
         <!-- STUCK HERE MUCH-->
         <div id="two-player-mode" class="fadeeffect" style="display:none;">
-            
-<table>
-    <form class="flatform">
-        <thead>
-            <td>
-                player1
-            </td>
-            <td>
-                player2
-            </td>
-        </thead>
-        <tr>
-            <td>
-                <!-- Price <input type="radio" value="1" name="crit[0]" checked> vs. Floor Area <input type="radio" value="2" name="crit[0]"><br/> -->
-                <input type="radio" id="2crit[0]-1" name="2crit[0]" value="1" autocomplete="off" checked="checked" hidden>
-                <label for="2crit[0]-1" class="switch switch --on">Price</label>
-                <input type="radio" id="2crit[0]-2" name="2crit[0]" value="2" autocomplete="off" hidden>
-                <label for="2crit[0]-2" class="switch switch --off">Floor Area</label>
 
-                <!-- 1 <input type="radio" name="intensity[0]" value="1"> 
+            <table>
+                <form class="flatform">
+                    <thead>
+                        <td>
+                            player1
+                        </td>
+                        <td>
+                            player2
+                        </td>
+                    </thead>
+                    <tr>
+                        <td>
+                            <!-- Price <input type="radio" value="1" name="crit[0]" checked> vs. Floor Area <input type="radio" value="2" name="crit[0]"><br/> -->
+                            <input type="radio" id="2crit[0]-1" name="2crit[0]" value="1" autocomplete="off" checked="checked" hidden>
+                            <label for="2crit[0]-1" class="switch switch --on">Price</label>
+                            <input type="radio" id="2crit[0]-2" name="2crit[0]" value="2" autocomplete="off" hidden>
+                            <label for="2crit[0]-2" class="switch switch --off">Floor Area</label>
+
+                            <!-- 1 <input type="radio" name="intensity[0]" value="1"> 
         2 <input type="radio" name="intensity[0]" value="2"> 
         3 <input type="radio" name="intensity[0]" value="3"> 
         4 <input type="radio" name="intensity[0]" value="4"> 
         5 <input type="radio" name="intensity[0]" value="5" checked>  -->
-                <p>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-1" value="1">
-                        <label for="2intensity[0]-1" class="switch switch --on">1</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-2" value="2">
-                        <label for="2intensity[0]-2" class="switch switch --on">2</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-3" value="3">
-                        <label for="2intensity[0]-3" class="switch switch --on">3</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-4" value="4">
-                        <label for="2intensity[0]-4" class="switch switch --on">4</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-5" value="5" checked="checked">
-                        <label for="2intensity[0]-5" class="switch switch --on">5</label>
-                </p>
-            </td>
-            <td>
-                <!-- Price
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-1" value="1">
+                                <label for="2intensity[0]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-2" value="2">
+                                <label for="2intensity[0]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-3" value="3">
+                                <label for="2intensity[0]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-4" value="4">
+                                <label for="2intensity[0]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[0]" id="2intensity[0]-5" value="5" checked="checked">
+                                <label for="2intensity[0]-5" class="switch switch --on">5</label>
+                            </p>
+                        </td>
+                        <td>
+                            <!-- Price
                 <input type="radio" value="1" name="crit2[0]" checked>vs. Floor Area
                 <input type="radio" value="2" name="crit2[0]"> -->
-                <input type="radio" id="2crit2[0]-1" name="2crit2[0]" value="1" autocomplete="off" checked="checked" hidden>
-                    <label for="2crit2[0]-1" class="switch switch --on">Price</label>
-                <input type="radio" id="2crit2[0]-2" name="2crit2[0]" value="2" autocomplete="off" hidden>
-                    <label for="2crit2[0]-2" class="switch switch --off">Floor Area</label>
-                <!-- <br/>1
+                            <input type="radio" id="2crit2[0]-1" name="2crit2[0]" value="1" autocomplete="off" checked="checked" hidden>
+                            <label for="2crit2[0]-1" class="switch switch --on">Price</label>
+                            <input type="radio" id="2crit2[0]-2" name="2crit2[0]" value="2" autocomplete="off" hidden>
+                            <label for="2crit2[0]-2" class="switch switch --off">Floor Area</label>
+                            <!-- <br/>1
                 <input type="radio" name="intensity2[0]" value="1">2
                 <input type="radio" name="intensity2[0]" value="2">3
                 <input type="radio" name="intensity2[0]" value="3">4
                 <input type="radio" name="intensity2[0]" value="4">5
                 <input type="radio" name="intensity2[0]" value="5" checked> -->
-                <p>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-1" value="1">
-                        <label for="2intensity2[0]-1" class="switch switch --on">1</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-2" value="2">
-                        <label for="2intensity2[0]-2" class="switch switch --on">2</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-3" value="3">
-                        <label for="2intensity2[0]-3" class="switch switch --on">3</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-4" value="4">
-                        <label for="2intensity2[0]-4" class="switch switch --on">4</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-5" value="5" checked="checked">
-                        <label for="2intensity2[0]-5" class="switch switch --on">5</label>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- Price
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-1" value="1">
+                                <label for="2intensity2[0]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-2" value="2">
+                                <label for="2intensity2[0]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-3" value="3">
+                                <label for="2intensity2[0]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-4" value="4">
+                                <label for="2intensity2[0]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[0]" id="2intensity2[0]-5" value="5" checked="checked">
+                                <label for="2intensity2[0]-5" class="switch switch --on">5</label>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Price
                 <input type="radio" value="1" name="crit[1]" checked>vs Distance to MRT
                 <input type="radio" value="2" name="crit[1]">
                 <br/>1
@@ -275,285 +275,285 @@
                 <input type="radio" name="intensity[1]" value="4">5
                 <input type="radio" name="intensity[1]" value="5" checked> -->
 
-                <input type="radio" value="1" name="2crit[1]" id="2crit[1]-1" hidden autocomplete="off" checked="checked">
-                    <label for="2crit[1]-1" class="switch switch --on">Price</label>
-                <input type="radio" value="2" name="2crit[1]" id="2crit[1]-2" autocomplete="off" hidden>
-                    <label for="2crit[1]-2" class="switch switch --off">Distance to MRT</label>
+                            <input type="radio" value="1" name="2crit[1]" id="2crit[1]-1" hidden autocomplete="off" checked="checked">
+                            <label for="2crit[1]-1" class="switch switch --on">Price</label>
+                            <input type="radio" value="2" name="2crit[1]" id="2crit[1]-2" autocomplete="off" hidden>
+                            <label for="2crit[1]-2" class="switch switch --off">Distance to MRT</label>
 
-                <p>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-1" value="1">
-                        <label for="2intensity[1]-1" class="switch switch --on">1</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-2" value="2">
-                        <label for="2intensity[1]-2" class="switch switch --on">2</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-3" value="3">
-                        <label for="2intensity[1]-3" class="switch switch --on">3</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-4" value="4">
-                        <label for="2intensity[1]-4" class="switch switch --on">4</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-5" value="5" checked="checked">
-                        <label for="2intensity[1]-5" class="switch switch --on">5</label>
-                </p>
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-1" value="1">
+                                <label for="2intensity[1]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-2" value="2">
+                                <label for="2intensity[1]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-3" value="3">
+                                <label for="2intensity[1]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-4" value="4">
+                                <label for="2intensity[1]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[1]" id="2intensity[1]-5" value="5" checked="checked">
+                                <label for="2intensity[1]-5" class="switch switch --on">5</label>
+                            </p>
 
-            </td>
-            <td>
-                <!-- Price
+                        </td>
+                        <td>
+                            <!-- Price
                 <input type="radio" value="1" name="crit2[1]" checked>vs Distance to MRT
                 <input type="radio" value="2" name="crit2[1]"> -->
-                <input type="radio" value="1" name="2crit2[1]" id="2crit2[1]-1" hidden autocomplete="off" checked="checked">
-                    <label for="2crit2[1]-1" class="switch switch --on">Price</label>
-                <input type="radio" value="2" name="2crit2[1]" id="2crit2[1]-2" autocomplete="off" hidden>
-                    <label for="2crit2[1]-2" class="switch switch --off">Distance to MRT</label>
-                <!-- <br/>1
+                            <input type="radio" value="1" name="2crit2[1]" id="2crit2[1]-1" hidden autocomplete="off" checked="checked">
+                            <label for="2crit2[1]-1" class="switch switch --on">Price</label>
+                            <input type="radio" value="2" name="2crit2[1]" id="2crit2[1]-2" autocomplete="off" hidden>
+                            <label for="2crit2[1]-2" class="switch switch --off">Distance to MRT</label>
+                            <!-- <br/>1
                 <input type="radio" name="intensity2[1]" value="1">2
                 <input type="radio" name="intensity2[1]" value="2">3
                 <input type="radio" name="intensity2[1]" value="3">4
                 <input type="radio" name="intensity2[1]" value="4">5
                 <input type="radio" name="intensity2[1]" value="5" checked> -->
-                <p>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-1" value="1">
-                        <label for="2intensity2[1]-1" class="switch switch --on">1</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-2" value="2">
-                        <label for="2intensity2[1]-2" class="switch switch --on">2</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-3" value="3">
-                        <label for="2intensity2[1]-3" class="switch switch --on">3</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-4" value="4">
-                        <label for="2intensity2[1]-4" class="switch switch --on">4</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-5" value="5" checked="checked">
-                        <label for="2intensity2[1]-5" class="switch switch --on">5</label>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- Price
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-1" value="1">
+                                <label for="2intensity2[1]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-2" value="2">
+                                <label for="2intensity2[1]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-3" value="3">
+                                <label for="2intensity2[1]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-4" value="4">
+                                <label for="2intensity2[1]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[1]" id="2intensity2[1]-5" value="5" checked="checked">
+                                <label for="2intensity2[1]-5" class="switch switch --on">5</label>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Price
                 <input type="radio" value="1" name="crit[2]" checked>vs Distance to School
                 <input type="radio" value="2" name="crit[2]"> -->
-                <input type="radio" value="1" name="2crit[2]" id="2crit[2]-1" hidden autocomplete="off" checked="checked">
-                    <label for="2crit[2]-1" class="switch switch --on">Price</label>
-                <input type="radio" value="2" name="2crit[2]" id="2crit[2]-2" autocomplete="off" hidden>
-                    <label for="2crit[2]-2" class="switch switch --off">Distance to School</label>
-                    <p>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-1" value="1" checked="checked">
-                        <label for="2intensity[2]-1" class="switch switch --on">1</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-2" value="2">
-                        <label for="2intensity[2]-2" class="switch switch --on">2</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-3" value="3">
-                        <label for="2intensity[2]-3" class="switch switch --on">3</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-4" value="4">
-                        <label for="2intensity[2]-4" class="switch switch --on">4</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-5" value="5">
-                        <label for="2intensity[2]-5" class="switch switch --on">5</label>
-                    </p>
+                            <input type="radio" value="1" name="2crit[2]" id="2crit[2]-1" hidden autocomplete="off" checked="checked">
+                            <label for="2crit[2]-1" class="switch switch --on">Price</label>
+                            <input type="radio" value="2" name="2crit[2]" id="2crit[2]-2" autocomplete="off" hidden>
+                            <label for="2crit[2]-2" class="switch switch --off">Distance to School</label>
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-1" value="1" checked="checked">
+                                <label for="2intensity[2]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-2" value="2">
+                                <label for="2intensity[2]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-3" value="3">
+                                <label for="2intensity[2]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-4" value="4">
+                                <label for="2intensity[2]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[2]" id="2intensity[2]-5" value="5">
+                                <label for="2intensity[2]-5" class="switch switch --on">5</label>
+                            </p>
 
-               <!--  <br/>1
+                            <!--  <br/>1
                 <input type="radio" name="intensity[2]" value="1">2
                 <input type="radio" name="intensity[2]" value="2">3
                 <input type="radio" name="intensity[2]" value="3">4
                 <input type="radio" name="intensity[2]" value="4">5
                 <input type="radio" name="intensity[2]" value="5" checked> -->
-            </td>
-            <td>
-                <!-- Price
+                        </td>
+                        <td>
+                            <!-- Price
                 <input type="radio" value="1" name="crit2[2]" checked>vs Distance to School
                 <input type="radio" value="2" name="crit2[2]"> -->
-                <input type="radio" value="1" name="2crit2[2]" id="2crit2[2]-1" hidden autocomplete="off" checked="checked">
-                    <label for="2crit2[2]-1" class="switch switch --on">Price</label>
-                <input type="radio" value="2" name="2crit2[2]" id="2crit2[2]-2" autocomplete="off" hidden>
-                    <label for="2crit2[2]-2" class="switch switch --off">Distance to School</label>
-                <p>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-1" value="1" checked="checked">
-                            <label for="2intensity2[2]-1" class="switch switch --on">1</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-2" value="2">
-                            <label for="2intensity2[2]-2" class="switch switch --on">2</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-3" value="3">
-                            <label for="2intensity2[2]-3" class="switch switch --on">3</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-4" value="4">
-                            <label for="2intensity2[2]-4" class="switch switch --on">4</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-5" value="5">
-                            <label for="2intensity2[2]-5" class="switch switch --on">5</label>
-                    </p>
-                <!-- <br/>1
+                            <input type="radio" value="1" name="2crit2[2]" id="2crit2[2]-1" hidden autocomplete="off" checked="checked">
+                            <label for="2crit2[2]-1" class="switch switch --on">Price</label>
+                            <input type="radio" value="2" name="2crit2[2]" id="2crit2[2]-2" autocomplete="off" hidden>
+                            <label for="2crit2[2]-2" class="switch switch --off">Distance to School</label>
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-1" value="1" checked="checked">
+                                <label for="2intensity2[2]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-2" value="2">
+                                <label for="2intensity2[2]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-3" value="3">
+                                <label for="2intensity2[2]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-4" value="4">
+                                <label for="2intensity2[2]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[2]" id="2intensity2[2]-5" value="5">
+                                <label for="2intensity2[2]-5" class="switch switch --on">5</label>
+                            </p>
+                            <!-- <br/>1
                 <input type="radio" name="intensity2[2]" value="1">2
                 <input type="radio" name="intensity2[2]" value="2">3
                 <input type="radio" name="intensity2[2]" value="3">4
                 <input type="radio" name="intensity2[2]" value="4">5
                 <input type="radio" name="intensity2[2]" value="5" checked> -->
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- Floor Area
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Floor Area
                 <input type="radio" value="1" name="crit[3]" checked>vs Distance to MRT -->
 
-                <input type="radio" value="1" name="2crit[3]" id="2crit[3]-1" hidden autocomplete="off">
-                    <label for="2crit[3]-1" class="switch switch --on">Floor Area</label>
-                <input type="radio" value="2" name="2crit[3]" id="2crit[3]-2" autocomplete="off" hidden checked="checked">
-                    <label for="2crit[3]-2" class="switch switch --off">Distance to MRT</label>
+                            <input type="radio" value="1" name="2crit[3]" id="2crit[3]-1" hidden autocomplete="off">
+                            <label for="2crit[3]-1" class="switch switch --on">Floor Area</label>
+                            <input type="radio" value="2" name="2crit[3]" id="2crit[3]-2" autocomplete="off" hidden checked="checked">
+                            <label for="2crit[3]-2" class="switch switch --off">Distance to MRT</label>
 
-                <!-- <input type="radio" value="2" name="crit[3]">
+                            <!-- <input type="radio" value="2" name="crit[3]">
                 <br/>1
                 <input type="radio" name="intensity[3]" value="1">2
                 <input type="radio" name="intensity[3]" value="2">3
                 <input type="radio" name="intensity[3]" value="3">4
                 <input type="radio" name="intensity[3]" value="4" checked>5
                 <input type="radio" name="intensity[3]" value="5"> -->
-                <p>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-1" value="1">
-                        <label for="2intensity[3]-1" class="switch switch --on">1</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-2" value="2">
-                        <label for="2intensity[3]-2" class="switch switch --on">2</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-3" value="3">
-                        <label for="2intensity[3]-3" class="switch switch --on">3</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-4" value="4" checked="checked">
-                        <label for="2intensity[3]-4" class="switch switch --on">4</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-5" value="5">
-                        <label for="2intensity[3]-5" class="switch switch --on">5</label>
-                    </p>
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-1" value="1">
+                                <label for="2intensity[3]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-2" value="2">
+                                <label for="2intensity[3]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-3" value="3">
+                                <label for="2intensity[3]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-4" value="4" checked="checked">
+                                <label for="2intensity[3]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[3]" id="2intensity[3]-5" value="5">
+                                <label for="2intensity[3]-5" class="switch switch --on">5</label>
+                            </p>
 
-            </td>
-            <td>
-                <!-- Floor Area
+                        </td>
+                        <td>
+                            <!-- Floor Area
                 <input type="radio" value="1" name="crit2[3]" checked>vs Distance to MRT
                 <input type="radio" value="2" name="crit2[3]"> -->
-                <input type="radio" value="1" name="2crit2[3]" id="2crit2[3]-1" hidden autocomplete="off">
-                    <label for="2crit2[3]-1" class="switch switch --on">Floor Area</label>
-                <input type="radio" value="2" name="2crit2[3]" id="2crit2[3]-2" autocomplete="off" hidden checked="checked">
-                    <label for="2crit2[3]-2" class="switch switch --off">Distance to MRT</label>
-                <!-- <br/>1
+                            <input type="radio" value="1" name="2crit2[3]" id="2crit2[3]-1" hidden autocomplete="off">
+                            <label for="2crit2[3]-1" class="switch switch --on">Floor Area</label>
+                            <input type="radio" value="2" name="2crit2[3]" id="2crit2[3]-2" autocomplete="off" hidden checked="checked">
+                            <label for="2crit2[3]-2" class="switch switch --off">Distance to MRT</label>
+                            <!-- <br/>1
                 <input type="radio" name="intensity2[3]" value="1">2
                 <input type="radio" name="intensity2[3]" value="2">3
                 <input type="radio" name="intensity2[3]" value="3">4
                 <input type="radio" name="intensity2[3]" value="4" checked>5
                 <input type="radio" name="intensity2[3]" value="5"> -->
-                <p>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-1" value="1">
-                        <label for="2intensity2[3]-1" class="switch switch --on">1</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-2" value="2">
-                        <label for="2intensity2[3]-2" class="switch switch --on">2</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-3" value="3">
-                        <label for="2intensity2[3]-3" class="switch switch --on">3</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-4" value="4" checked="checked">
-                        <label for="2intensity2[3]-4" class="switch switch --on">4</label>
-                    <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-5" value="5">
-                        <label for="2intensity2[3]-5" class="switch switch --on">5</label>
-                    </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- Floor Area
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-1" value="1">
+                                <label for="2intensity2[3]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-2" value="2">
+                                <label for="2intensity2[3]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-3" value="3">
+                                <label for="2intensity2[3]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-4" value="4" checked="checked">
+                                <label for="2intensity2[3]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[3]" id="2intensity2[3]-5" value="5">
+                                <label for="2intensity2[3]-5" class="switch switch --on">5</label>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Floor Area
                 <input type="radio" value="1" name="crit[4]" checked>vs Distance to School
                 <input type="radio" value="2" name="crit[4]"> -->
-                <input type="radio" value="1" name="2crit[4]" id="2crit[4]-1" hidden autocomplete="off" checked="checked">
-                    <label for="2crit[4]-1" class="switch switch --on">Floor Area</label>
-                <input type="radio" value="2" name="2crit[4]" id="2crit[4]-2" autocomplete="off" hidden>
-                    <label for="2crit[4]-2" class="switch switch --off">Distance to School</label>
-                <!-- <br/>1
+                            <input type="radio" value="1" name="2crit[4]" id="2crit[4]-1" hidden autocomplete="off" checked="checked">
+                            <label for="2crit[4]-1" class="switch switch --on">Floor Area</label>
+                            <input type="radio" value="2" name="2crit[4]" id="2crit[4]-2" autocomplete="off" hidden>
+                            <label for="2crit[4]-2" class="switch switch --off">Distance to School</label>
+                            <!-- <br/>1
                 <input type="radio" name="intensity[4]" value="1">2
                 <input type="radio" name="intensity[4]" value="2">3
                 <input type="radio" name="intensity[4]" value="3">4
                 <input type="radio" name="intensity[4]" value="4" checked>5
                 <input type="radio" name="intensity[4]" value="5"> -->
-                <p>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-1" value="1" checked="checked">
-                        <label for="2intensity[4]-1" class="switch switch --on">1</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-2" value="2">
-                        <label for="2intensity[4]-2" class="switch switch --on">2</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-3" value="3">
-                        <label for="2intensity[4]-3" class="switch switch --on">3</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-4" value="4">
-                        <label for="2intensity[4]-4" class="switch switch --on">4</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-5" value="5">
-                        <label for="2intensity[4]-5" class="switch switch --on">5</label>
-                    </p>
-            </td>
-            <td>
-                <!-- Floor Area
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-1" value="1" checked="checked">
+                                <label for="2intensity[4]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-2" value="2">
+                                <label for="2intensity[4]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-3" value="3">
+                                <label for="2intensity[4]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-4" value="4">
+                                <label for="2intensity[4]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[4]" id="2intensity[4]-5" value="5">
+                                <label for="2intensity[4]-5" class="switch switch --on">5</label>
+                            </p>
+                        </td>
+                        <td>
+                            <!-- Floor Area
                 <input type="radio" value="1" name="crit2[4]" checked>vs Distance to School
                 <input type="radio" value="2" name="crit2[4]"> -->
-                <input type="radio" value="1" name="2crit2[4]" id="2crit2[4]-1" hidden autocomplete="off" checked="checked">
-                    <label for="2crit2[4]-1" class="switch switch --on">Floor Area</label>
-                <input type="radio" value="2" name="2crit2[4]" id="2crit2[4]-2" autocomplete="off" hidden>
-                    <label for="2crit2[4]-2" class="switch switch --off">Distance to School</label>
-                <!-- <br/>1
+                            <input type="radio" value="1" name="2crit2[4]" id="2crit2[4]-1" hidden autocomplete="off" checked="checked">
+                            <label for="2crit2[4]-1" class="switch switch --on">Floor Area</label>
+                            <input type="radio" value="2" name="2crit2[4]" id="2crit2[4]-2" autocomplete="off" hidden>
+                            <label for="2crit2[4]-2" class="switch switch --off">Distance to School</label>
+                            <!-- <br/>1
                 <input type="radio" name="intensity2[4]" value="1">2
                 <input type="radio" name="intensity2[4]" value="2">3
                 <input type="radio" name="intensity2[4]" value="3">4
                 <input type="radio" name="intensity2[4]" value="4" checked>5
                 <input type="radio" name="intensity2[4]" value="5"> -->
-                <p>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-1" value="1" checked="checked">
-                        <label for="2intensity2[4]-1" class="switch switch --on">1</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-2" value="2">
-                        <label for="2intensity2[4]-2" class="switch switch --on">2</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-3" value="3">
-                        <label for="2intensity2[4]-3" class="switch switch --on">3</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-4" value="4">
-                        <label for="2intensity2[4]-4" class="switch switch --on">4</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-5" value="5">
-                        <label for="2intensity2[4]-5" class="switch switch --on">5</label>
-                    </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- Distance to MRT
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-1" value="1" checked="checked">
+                                <label for="2intensity2[4]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-2" value="2">
+                                <label for="2intensity2[4]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-3" value="3">
+                                <label for="2intensity2[4]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-4" value="4">
+                                <label for="2intensity2[4]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[4]" id="2intensity2[4]-5" value="5">
+                                <label for="2intensity2[4]-5" class="switch switch --on">5</label>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Distance to MRT
                 <input type="radio" value="1" name="crit[5]" checked>vs Distance to School
                 <input type="radio" value="2" name="crit[5]"> -->
 
-                <input type="radio" value="1" name="2crit[5]" id="2crit[5]-1" hidden autocomplete="off" checked="checked">
-                    <label for="2crit[5]-1" class="switch switch --on">Distance to MRT</label>
-                <input type="radio" value="2" name="2crit[5]" id="2crit[5]-2" autocomplete="off" hidden>
-                    <label for="2crit[5]-2" class="switch switch --off">Distance to School</label>
+                            <input type="radio" value="1" name="2crit[5]" id="2crit[5]-1" hidden autocomplete="off" checked="checked">
+                            <label for="2crit[5]-1" class="switch switch --on">Distance to MRT</label>
+                            <input type="radio" value="2" name="2crit[5]" id="2crit[5]-2" autocomplete="off" hidden>
+                            <label for="2crit[5]-2" class="switch switch --off">Distance to School</label>
 
-                <!-- <br/>1
+                            <!-- <br/>1
                 <input type="radio" name="intensity[5]" value="1">2
                 <input type="radio" name="intensity[5]" value="2">3
                 <input type="radio" name="intensity[5]" value="3" checked>4
                 <input type="radio" name="intensity[5]" value="4">5
                 <input type="radio" name="intensity[5]" value="5"> -->
-                <p>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-1" value="1">
-                        <label for="2intensity[5]-1" class="switch switch --on">1</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-2" value="2">
-                        <label for="2intensity[5]-2" class="switch switch --on">2</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-3" value="3" checked="checked">
-                        <label for="2intensity[5]-3" class="switch switch --on">3</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-4" value="4">
-                        <label for="2intensity[5]-4" class="switch switch --on">4</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-5" value="5">
-                        <label for="2intensity[5]-5" class="switch switch --on">5</label>
-                    </p>
-            </td>
-            <td>
-                <!-- Distance to MRT
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-1" value="1">
+                                <label for="2intensity[5]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-2" value="2">
+                                <label for="2intensity[5]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-3" value="3" checked="checked">
+                                <label for="2intensity[5]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-4" value="4">
+                                <label for="2intensity[5]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity[5]" id="2intensity[5]-5" value="5">
+                                <label for="2intensity[5]-5" class="switch switch --on">5</label>
+                            </p>
+                        </td>
+                        <td>
+                            <!-- Distance to MRT
                 <input type="radio" value="1" name="crit2[5]" checked>vs Distance to School
                 <input type="radio" value="2" name="crit2[5]"> -->
-                <input type="radio" value="1" name="2crit2[5]" id="2crit2[5]-1" hidden autocomplete="off" checked="checked">
-                    <label for="2crit2[5]-1" class="switch switch --on">Distance to MRT</label>
-                <input type="radio" value="2" name="2crit2[5]" id="2crit2[5]-2" autocomplete="off" hidden>
-                    <label for="2crit2[5]-2" class="switch switch --off">Distance to School</label>
-                <!-- <br/>1
+                            <input type="radio" value="1" name="2crit2[5]" id="2crit2[5]-1" hidden autocomplete="off" checked="checked">
+                            <label for="2crit2[5]-1" class="switch switch --on">Distance to MRT</label>
+                            <input type="radio" value="2" name="2crit2[5]" id="2crit2[5]-2" autocomplete="off" hidden>
+                            <label for="2crit2[5]-2" class="switch switch --off">Distance to School</label>
+                            <!-- <br/>1
                 <input type="radio" name="intensity2[5]" value="1">2
                 <input type="radio" name="intensity2[5]" value="2">3
                 <input type="radio" name="intensity2[5]" value="3" checked>4
                 <input type="radio" name="intensity2[5]" value="4">5
                 <input type="radio" name="intensity2[5]" value="5"> -->
-                <p>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-1" value="1">
-                        <label for="2intensity2[5]-1" class="switch switch --on">1</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-2" value="2">
-                        <label for="2intensity2[5]-2" class="switch switch --on">2</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-3" value="3" checked="checked">
-                        <label for="2intensity2[5]-3" class="switch switch --on">3</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-4" value="4">
-                        <label for="2intensity2[5]-4" class="switch switch --on">4</label>
-                        <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-5" value="5">
-                        <label for="2intensity2[5]-5" class="switch switch --on">5</label>
-                    </p>
-            </td>
-        </tr>
-</table>
-
+                            <p>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-1" value="1">
+                                <label for="2intensity2[5]-1" class="switch switch --on">1</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-2" value="2">
+                                <label for="2intensity2[5]-2" class="switch switch --on">2</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-3" value="3" checked="checked">
+                                <label for="2intensity2[5]-3" class="switch switch --on">3</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-4" value="4">
+                                <label for="2intensity2[5]-4" class="switch switch --on">4</label>
+                                <input type="radio" hidden autocomplete="off" name="2intensity2[5]" id="2intensity2[5]-5" value="5">
+                                <label for="2intensity2[5]-5" class="switch switch --on">5</label>
+                            </p>
+                        </td>
+                    </tr>
+            </table>
+            <button type="button" onclick="runAHP(2);">Run AHP</button>
         </div>
     </div>
 </body>
