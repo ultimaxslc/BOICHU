@@ -22,7 +22,7 @@ function addUserMarkerControl() {
         return this._div;
     };
     userInputControl.userInputOn = function() {
-        this._div.innerHTML = '<div id="default-popup"  onclick="addUserMarker()">Add Marker</div>';
+        this._div.innerHTML = '<div id="default-popup" onclick="addUserMarker()">Add Marker</div>';
     };
     
     // on the fourth click, i want the same button (Add Marker) to trigger the popup
@@ -30,12 +30,11 @@ function addUserMarkerControl() {
         openDialog();
         var htmlOutput ="";
         htmlOutput += '<aside id="default-popup" class="avgrund-popup">';
-        htmlOutput += '<h2>OOPS</h2>';
-        htmlOutput += '<p>To help you make a better decision, you can only choose 3 locations! You can hit ESC or click outside to close the modal. Give it a go to see the reverse transition.</p>';
+        htmlOutput += '<h2>Oops!</h2>';
+        htmlOutput += '<p>Our Boichu monkeys informed us that in order to help you make a better decision, you should only choose 3 locations!</p>';
         
-        htmlOutput +=  '<button onclick="javascript:closeDialog();">Close</button></aside>';
-        //temp = document.getElementById("toggle");
-        //temp.click().openDialog();
+        // htmlOutput +=  '<button onclick="javascript:closeDialog();">Close</button></aside>';
+        htmlOutput += '<a href="#" style="color:#fff" onclick="javascript:closeDialog();" class="alert-close">Close</a></aside>';
         this._div.innerHTML = htmlOutput;
     };
     
@@ -84,6 +83,7 @@ function getAHPForm() {
 }
 
 function addUserMarker() {
+    $.sticky('Tip: Right click on the marker to remove it!');
 
     if (inputMarker.length >= 3) {
         //insert some code to stop user from adding more markers
