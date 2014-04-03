@@ -2,7 +2,7 @@ var map, jsonArray = [],
         boundaryArray = [],
         googleLayerSatellite, googleLayerStreet, openStreeMapLayer, markersCluster, transactedPriceHeatMap, PointSymbolMap, PointSymbolMapLegend, pointSymbolHeatMap, mrtMapLines = [],
         mrtMapLayerReference, schoolsLayer, stadiumsLayer, polygonBoundary, polygonBoundaryLegend, proportionalSymbolMap, proportionalInfo, proportionalFocus, info, choroplethInfo, choroplethMaxValue, choroplethMinValue, numberOfChoroplethClasses = 9,
-        choroplethFocus, osmMap, choroplethControl, layerControl, mrtStationGeoJsonData, schoolGeoJsonData, isSinglePlayerMode = true;
+        choroplethFocus, osmMap, choroplethControl, layerControl, mrtStationGeoJsonData, schoolGeoJsonData, isSinglePlayerMode = true, heatMapLegend;
 
 var bounceCount = 5;
 
@@ -197,6 +197,9 @@ function addLayerChangeEventHandler() {
         if (eventLayer.name === 'Proportional Symbol') {
             this.addControl(proportionalInfo);
         }
+        if (eventLayer.name === 'Heat Map') {
+            this.addControl(heatMapLegend);
+        }
 
     });
     map.on('overlayremove', function(eventLayer) {
@@ -213,6 +216,9 @@ function addLayerChangeEventHandler() {
 
         if (eventLayer.name === 'Proportional Symbol') {
             this.removeControl(proportionalInfo);
+        }
+        if (eventLayer.name === 'Heat Map') {
+            this.removeControl(heatMapLegend);
         }
     });
 }
@@ -792,6 +798,23 @@ function addPointSymbolHeatMap(json) {
         var point = heatMapArray[i];
         pointSymbolHeatMap.addDataPoint(point['lat'], point['lng'], point['size'], point['intensity']);
     }
+    
+    addHeatMapLegend();
+
+}
+
+function addHeatMapLegend(){
+    heatMapLegend = L.control({
+        position: 'bottomright'
+    });
+    heatMapLegend.onAdd = function(map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+    heatMapLegend.update = function() {
+        this._div.innerHTML = '<img src="img/heatlegend.png" height="200">';
+    };
 }
 
 function resetAHP() {
