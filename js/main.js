@@ -1,4 +1,8 @@
-var map, jsonArray = [], boundaryArray = [], googleLayerSatellite, googleLayerStreet, openStreeMapLayer, markersCluster, transactedPriceHeatMap, PointSymbolMap, PointSymbolMapLegend, pointSymbolHeatMap, mrtMapLines = [], mrtMapLayerReference, schoolsLayer, stadiumsLayer, polygonBoundary, polygonBoundaryLegend, proportionalSymbolMap, proportionalInfo, proportionalFocus, info, choroplethInfo, choroplethMaxValue, choroplethMinValue, numberOfChoroplethClasses = 9, choroplethFocus, choroplethControl, layerControl, mrtStationGeoJsonData, schoolGeoJsonData;
+var map, jsonArray = [],
+    boundaryArray = [],
+    googleLayerSatellite, googleLayerStreet, openStreeMapLayer, markersCluster, transactedPriceHeatMap, PointSymbolMap, PointSymbolMapLegend, pointSymbolHeatMap, mrtMapLines = [],
+    mrtMapLayerReference, schoolsLayer, stadiumsLayer, polygonBoundary, polygonBoundaryLegend, proportionalSymbolMap, proportionalInfo, proportionalFocus, info, choroplethInfo, choroplethMaxValue, choroplethMinValue, numberOfChoroplethClasses = 9,
+    choroplethFocus, osmMap, choroplethControl, layerControl, mrtStationGeoJsonData, schoolGeoJsonData, isSinglePlayerMode = true;
 
 var bounceCount = 5;
 
@@ -15,12 +19,16 @@ function loadScript() {
     openStreeMapLayer = L.tileLayer.grayscale('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     });
-    // googleLayerSatellite = new L.Google('SATELLITE');
-    // googleLayerStreet = new L.Google('ROADMAP');
+    googleLayerSatellite = new L.Google('SATELLITE');
+    googleLayerStreet = new L.Google('ROADMAP');
+    osmMap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; ' + '<a href="http://openstreetmap.org">OpenStreetMap</a>' + ' Contributors'
+    });
     var baseMaps = {
-        // 'Google (Satellite)': googleLayerSatellite,
-        // 'Google(Street)': googleLayerStreet,
-        'Open Street Maps': openStreeMapLayer
+        'Open Street Map' : osmMap,
+        'Open Street Maps (B/W)': openStreeMapLayer,
+        'Google (Satellite)': googleLayerSatellite,
+        'Google (Street)': googleLayerStreet,
     };
     markersCluster = L.markerClusterGroup();
     transactedPriceHeatMap = new L.TileLayer.HeatCanvas({}, {
@@ -34,7 +42,7 @@ function loadScript() {
         size: 1000,
         autoresize: true,
         opacity: 0.5
-                // zIndex: 100
+        // zIndex: 100
     });
     proportionalSymbolMap = L.layerGroup();
     schoolsLayer = L.layerGroup();
@@ -115,7 +123,7 @@ function loadScript() {
         'Stadiums': stadiumsLayer
     };
 
-    map.addLayer(openStreeMapLayer);
+    map.addLayer(osmMap);
     addHoverInfoControl();
     layerControl = L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
@@ -124,20 +132,40 @@ function loadScript() {
     addLayerChangeEventHandler();
     addPanLayerControl();
     addUserMarkerControl();
+    applyAHPFormEffect();
 
     $.ajaxSetup({
         async: false
     });
-    // $(".loading").remove();
-    $(".genericcontainer").fadeOut(1500, function(){
+    $(".genericcontainer").fadeOut(1500, function() {
         $(".genericcontainer").remove();
     });
+
+    $(".splashlayer").fadeOut(1200);
 }
 
 function addPanLayerControl() {
     panLayerControl = L.control.pan({
         position: "topleft"
     }).addTo(map)
+}
+
+function applyAHPFormEffect() {
+    $('#mode-switch-single').click(function() {
+        if (!isSinglePlayerMode) {
+            isSinglePlayerMode = true;
+            $('#two-player-mode').toggle();
+            $('#single-player-mode').toggle();
+        }
+    });
+
+    $('#mode-switch-dual').click(function() {
+        isSinglePlayerMode = false;
+        if (!isSinglePlayerMode) {
+            $('#two-player-mode').toggle();
+            $('#single-player-mode').toggle();
+        }
+    });
 }
 
 function addLayerChangeEventHandler() {
@@ -360,12 +388,12 @@ function renderChoroplethVariableControl() {
     choroplethControl.onAdd = function(map) {
         this._div = L.DomUtil.create('div', 'varControl');
         this._div.innerHTML = '<select onchange="getSelectedVariableInChoroplethControl()">' +
-                '<option value="Number Of Transactions"' + (choroplethFocus === "Number Of Transactions" ? " selected" : "") + '>Number of Transactions</option>' +
-                '<option value="Total Area Sold"' + (choroplethFocus === "Total Area Sold" ? " selected" : "") + '>Total Area Sold</option>' +
-                '<option value="Total Transaction Amount"' + (choroplethFocus === "Total Transaction Amount" ? " selected" : "") + '>Total Transaction Amount</option>' +
-                '<option value="Average Transaction Amount"' + (choroplethFocus === "Average Transaction Amount" ? " selected" : "") + '>Average Transaction Amount</option>' +
-                '<option value="Average Price Area"' + (choroplethFocus === "Average Price Area" ? " selected" : "") + '>Average Price per Area</option>' +
-                '</select>';
+            '<option value="Number Of Transactions"' + (choroplethFocus === "Number Of Transactions" ? " selected" : "") + '>Number of Transactions</option>' +
+            '<option value="Total Area Sold"' + (choroplethFocus === "Total Area Sold" ? " selected" : "") + '>Total Area Sold</option>' +
+            '<option value="Total Transaction Amount"' + (choroplethFocus === "Total Transaction Amount" ? " selected" : "") + '>Total Transaction Amount</option>' +
+            '<option value="Average Transaction Amount"' + (choroplethFocus === "Average Transaction Amount" ? " selected" : "") + '>Average Transaction Amount</option>' +
+            '<option value="Average Price Area"' + (choroplethFocus === "Average Price Area" ? " selected" : "") + '>Average Price per Area</option>' +
+            '</select>';
         // this.update();
         return this._div;
     };
@@ -399,8 +427,8 @@ function getSubZoneProportionalInfo(subzone) {
     var interestedValue = subzone[proportionalFocus];
 
     return '<b>Area Name: ' + subzone.DGPZ_NAME + '</b><br />' +
-            'Sub Area Name: ' + subzone.DGPSZ_NAME + '<br>' +
-            proportionalFocus + ': ' + Math.round(interestedValue) + '<br>';
+        'Sub Area Name: ' + subzone.DGPSZ_NAME + '<br>' +
+        proportionalFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
 function setChoroplethLayer(polygonJson, transactionJson, chosenFocus) {
@@ -517,8 +545,8 @@ function getSubZoneInfo(subzone) {
     var interestedValue = subzone.properties[choroplethFocus];
 
     return '<b>Area Name: ' + zone.DGPZ_NAME + '</b><br />' +
-            'Sub Area Name: ' + zone.DGPSZ_NAME + '<br>' +
-            choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
+        'Sub Area Name: ' + zone.DGPSZ_NAME + '<br>' +
+        choroplethFocus + ': ' + Math.round(interestedValue) + '<br>';
 }
 
 function setChoroplethLegendFor(chosenOption) {
@@ -530,9 +558,9 @@ function setChoroplethLegendFor(chosenOption) {
 
     while (upperBound < choroplethMaxValue) {
         if (chosenOption == 'Average Transaction Amount' ||
-                chosenOption == 'Total Transaction Amount' ||
-                chosenOption == 'Average Price per Area' ||
-                chosenOption == 'Average Price Area') {
+            chosenOption == 'Total Transaction Amount' ||
+            chosenOption == 'Average Price per Area' ||
+            chosenOption == 'Average Price Area') {
             key = numeral(lowerBound).format('$0,0.00') + ' - ' + numeral(upperBound).format('$0,0.00');
         } else {
             key = numeral(lowerBound).format('0,0') + ' - ' + numeral(upperBound).format('0,0');
@@ -561,14 +589,14 @@ function getChoroplethColour(value) {
     var interval = (choroplethMaxValue - choroplethMinValue) / numberOfChoroplethClasses;
 
     return value > choroplethMaxValue - 1 * interval ? '#08306b' :
-            value > choroplethMaxValue - 2 * interval ? '#08519c' :
-            value > choroplethMaxValue - 3 * interval ? '#2171b5' :
-            value > choroplethMaxValue - 4 * interval ? '#4292c6' :
-            value > choroplethMaxValue - 5 * interval ? '#6baed6' :
-            value > choroplethMaxValue - 6 * interval ? '#9ecae1' :
-            value > choroplethMaxValue - 7 * interval ? '#c6dbef' :
-            value > choroplethMaxValue - 8 * interval ? '#deebf7' :
-            '#f7fbff';
+        value > choroplethMaxValue - 2 * interval ? '#08519c' :
+        value > choroplethMaxValue - 3 * interval ? '#2171b5' :
+        value > choroplethMaxValue - 4 * interval ? '#4292c6' :
+        value > choroplethMaxValue - 5 * interval ? '#6baed6' :
+        value > choroplethMaxValue - 6 * interval ? '#9ecae1' :
+        value > choroplethMaxValue - 7 * interval ? '#c6dbef' :
+        value > choroplethMaxValue - 8 * interval ? '#deebf7' :
+        '#f7fbff';
 }
 
 //Information Control for dynamic tooltipping
@@ -754,9 +782,9 @@ function runAHP() {
     if (inputMarker.length <= 0) {
 
         /*
-         * 
+         *
          * To Be Coded: message to tell  user to add a marker before running AHP
-         * 
+         *
          */
 
         alert("No markers on the map");
@@ -764,27 +792,30 @@ function runAHP() {
     }
 
     var dataMarkerArray = getMarkerDetails();
-    
-    
-    /*
-     * 
-     * processAHP Changed, last parameter takes either 1 or 2 representing number of players for AHP
-     * 
-     */
-    
-    var chosenLocation = processAHP(dataMarkerArray,1);
+
 
     /*
-     * 
+     *
+     * processAHP Changed, last parameter takes either 1 or 2 representing number of players for AHP
+     *
+     */
+
+    var chosenLocation = processAHP(dataMarkerArray, 1);
+
+    /*
+     *
      * To Be Coded: Bounce works, but how to sustain the bounce?
-     * 
+     *
      * Or change marker icon to signal which location is selected??
-     * 
+     *
      */
 
     for (var i = 0; i < inputMarker.length; i++) {
         if (inputMarker[i].options.id === chosenLocation) {
-            inputMarker[i].bounce({duration: 1000, height: 100});
+            inputMarker[i].bounce({
+                duration: 1000,
+                height: 100
+            });
         }
     }
 }
