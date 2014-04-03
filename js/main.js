@@ -786,8 +786,7 @@ function runAHP(noOfPlayers) {
          * To Be Coded: message to tell  user to add a marker before running AHP
          *
          */
-
-        alert("No markers on the map");
+         $.sticky('<font color="#b83d80" style="text-align:center">You need to place 3 markers on the map before BOICHU can recommend!</font>');
         return;
     }
 
