@@ -37,7 +37,7 @@ function loadScript() {
         attribution: '&copy; ' + '<a href="http://openstreetmap.org">OpenStreetMap</a>' + ' Contributors'
     });
     var baseMaps = {
-        'Open Street Map' : osmMap
+        'Open Street Map': osmMap
                 // 'Open Street Maps (B/W)': openStreeMapLayer,
                 // 'Google (Satellite)': googleLayerSatellite,
                 // 'Google (Street)': googleLayerStreet,
@@ -752,7 +752,7 @@ function zoomToFeature(e) {
 function runAHP(noOfPlayers) {
 
     if (inputMarker.length <= 0) {
-         $.sticky('<font color="#b83d80" style="text-align:center">You need to place 3 markers on the map before BOICHU can recommend!</font>');
+        $.sticky('<font color="#b83d80" style="text-align:center">You need to place 3 markers on the map before BOICHU can recommend!</font>');
         return;
     }
 
@@ -765,11 +765,13 @@ function runAHP(noOfPlayers) {
             inputMarker[i].setIcon(chosenmarker);
         }
     }
+
+    ahpControl.initialiseResetOption();
 }
 
 function resetInputMarkerIcon() {
     for (var i = 0; i < inputMarker.length; i++) {
-        inputMarker[i].setIcon(new L.Icon.Default() );
+        inputMarker[i].setIcon(new L.Icon.Default());
     }
 }
 
@@ -790,6 +792,15 @@ function addPointSymbolHeatMap(json) {
         var point = heatMapArray[i];
         pointSymbolHeatMap.addDataPoint(point['lat'], point['lng'], point['size'], point['intensity']);
     }
+}
+
+function resetAHP() {
+    $('#two-player-mode').hide;
+    $('#single-player-mode').show();
+    $('#ahp-output').hide();
+    resetInputMarkerIcon();
+    applyAHPFormEffect();
+    $('#ahp-output').empty();
 }
 
 function test() {
