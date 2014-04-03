@@ -1,15 +1,9 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 var inputMarker = new Array();
-//var inputPopup;
 var userInputControl;
 var ahpControl;
 var id = 1;
+var helpControl;
 
 //TO DO: gather inputs from map, pass inputs into AHP method
 
@@ -58,7 +52,30 @@ function addUserMarkerControl() {
     };
 
     map.addControl(ahpControl);
-
+    
+    helpControl = L.control({position: 'bottomleft'});
+    helpControl.onAdd =  function(map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.helpControlOn();
+        
+        return this._div;
+    };
+    helpControl.helpControlOn = function() {
+        this._div.innerHTML = '<div id="info-popup" onclick="openInfoDialog()">?</div>';
+    };
+    
+    helpControl.infoDialog = function() {
+        // openInfoDialog();
+        var htmlOutput="";
+        htmlOutput += '<aside id="info-popup" class="avgrund-popup">';
+        htmlOutput += '<h2>Hello!</h2>';
+        htmlOutput += '<p>To facilitate easier usage for YOU, heres some tips you can follow! <br>To look out for patterns in property better, just check any one of our available layers by the right!</p>';
+        htmlOutput += '</aside>';
+        htmlOutput += '<a href="#" style="color:#fff" onclick="javascript:closeInfoDialog();" class="alert-close">Close</a></aside>';
+        this._div.innerHTML = htmlOutput;
+    }
+    
+    map.addControl(helpControl);
 }
 
 // Create avgrund popup
@@ -69,6 +86,16 @@ function closeDialog() {
     Avgrund.hide();
     userInputControl.userInputOn();
 }
+
+function openInfoDialog() {
+    Avgrund.show("#info-popup");
+    helpControl.infoDialog();
+}
+function closeInfoDialog() {
+    Avgrund.hide();
+    helpControl.helpControlOn();
+}
+
 
 function getAHPForm() {
     //AHP input metric comes here...
