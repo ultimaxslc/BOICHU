@@ -6,6 +6,7 @@
 
 var numcriteria = 4;
 var consistencyTable = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49];
+var consistencyRatio = 0;
 
 function processAHP(dataMarkerArray, numOfPlayer) {
     var locationArray = dataMarkerArray.locationArray;
@@ -22,9 +23,12 @@ function processAHP(dataMarkerArray, numOfPlayer) {
     var piorityArray = calculatePiorityMatrix(combineArray[1]);
 
     //Step 1B: calculate Consistency Ratio
-    var consistencyRatio = calculateConsistencyRatio(combineArray[0], piorityArray);
+    consistencyRatio = calculateConsistencyRatio(combineArray[0], piorityArray);
     console.log("Consistency Ratio: " + consistencyRatio);
 
+    $('#two-player-mode').hide();
+    $('#single-player-mode').hide();
+    $('#ahp-output').show();
     if (consistencyRatio > 0.1) {
 
         /*
@@ -34,6 +38,13 @@ function processAHP(dataMarkerArray, numOfPlayer) {
          */
 
         //alert("Calculated consistency ratio is less than 0.1, results might not be accurate.");
+        var alertContent = '<h4 style="font-style:italic; color:#b83d80">Calculated consistency ratio is less than 0.1, results might not be accurate.</h4>';
+        var consistencyAlert = $('<div/>', {
+            id: 'consistencyAlert',
+            classname: 'consistencyAlert',
+            html:alertContent
+        });
+        $('#ahp-output').append(consistencyAlert);
     }
 
     //Step 2: Compare each alternative based on different criterion
