@@ -28,19 +28,19 @@ function loadScript() {
         center: new L.LatLng(1.355312, 103.827068),
         zoom: 12
     });
-    // openStreeMapLayer = L.tileLayer.grayscale('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    // });
-    // googleLayerSatellite = new L.Google('SATELLITE');
-    // googleLayerStreet = new L.Google('ROADMAP');
+    openStreeMapLayer = L.tileLayer.grayscale('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    });
+    googleLayerSatellite = new L.Google('SATELLITE');
+    googleLayerStreet = new L.Google('ROADMAP');
     osmMap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; ' + '<a href="http://openstreetmap.org">OpenStreetMap</a>' + ' Contributors'
     });
     var baseMaps = {
-        'Open Street Map': osmMap
-                // 'Open Street Maps (B/W)': openStreeMapLayer,
-                // 'Google (Satellite)': googleLayerSatellite,
-                // 'Google (Street)': googleLayerStreet,
+        'Open Street Map': osmMap,
+                'Open Street Maps (B/W)': openStreeMapLayer,
+                'Google (Satellite)': googleLayerSatellite,
+                'Google (Street)': googleLayerStreet,
     };
     markersCluster = L.markerClusterGroup();
     transactedPriceHeatMap = new L.TileLayer.HeatCanvas({}, {
@@ -127,7 +127,7 @@ function loadScript() {
         'Cluster Marker': markersCluster,
         'Point Symbol': PointSymbolMap,
         'Transacted Price Heat Map': transactedPriceHeatMap,
-        'Heat Map': pointSymbolHeatMap,
+        // 'Heat Map': pointSymbolHeatMap,
         'MRT Map': mrtMapLayerReference,
         'Singapore Sub Zones': polygonBoundary,
         'Proportional Symbol': proportionalSymbolMap,
@@ -821,6 +821,7 @@ function resetAHP() {
     $('#two-player-mode').hide;
     $('#single-player-mode').show();
     $('#ahp-output').hide();
+    $('.mode-toggle').show();
     resetInputMarkerIcon();
     applyAHPFormEffect();
     $('#ahp-output').empty();
