@@ -41,7 +41,7 @@ function processAHP(dataMarkerArray, numOfPlayer) {
 
     if (consistencyRatio > 0.1) {
         //alert("Calculated consistency ratio is less than 0.1, results might not be accurate.");
-        var alertContent = '<h4 style="font-style:italic; color:#b83d80">Calculated consistency ratio is less than 0.1, results might not be accurate.</h4>';
+        var alertContent = '<h4 style="font-style:italic; color:#b83d80">Calculated consistency ratio is more than 0.1, results might not be accurate.</h4>';
         var consistencyAlert = $('<div/>', {
             id: 'consistencyAlert',
             class: 'consistencyAlert',

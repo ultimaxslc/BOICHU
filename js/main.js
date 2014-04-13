@@ -2,7 +2,7 @@ var map, jsonArray = [],
         boundaryArray = [],
         googleLayerSatellite, googleLayerStreet, openStreeMapLayer, markersCluster, transactedPriceHeatMap, PointSymbolMap, PointSymbolMapLegend, pointSymbolHeatMap, mrtMapLines = [],
         mrtMapLayerReference, schoolsLayer, stadiumsLayer, polygonBoundary, polygonBoundaryLegend, proportionalSymbolMap, proportionalInfo, proportionalFocus, info, choroplethInfo, choroplethMaxValue, choroplethMinValue, numberOfChoroplethClasses = 9,
-        choroplethFocus, osmMap, choroplethControl, layerControl, mrtStationGeoJsonData, schoolGeoJsonData, isSinglePlayerMode = true, heatMapLegend;
+        choroplethFocus, osmMap, choroplethControl, layerControl, mrtStationGeoJsonData, schoolGeoJsonData, clinicsLayer, isSinglePlayerMode = true, heatMapLegend;
 
 var bounceCount = 5;
 
@@ -114,6 +114,9 @@ function loadScript() {
     $.getJSON('data/Schools.geojson', function(schoolData) {
         addSchoolsMap(schoolData);
     });
+    $.getJSON('data/Clinics.geojson', function(clinicData) {
+        addClinicMap(clinicData);
+    });
 
 
     /*
@@ -132,7 +135,8 @@ function loadScript() {
         'Singapore Sub Zones': polygonBoundary,
         'Proportional Symbol': proportionalSymbolMap,
         'Schools': schoolsLayer,
-        'Stadiums': stadiumsLayer
+        'Stadiums': stadiumsLayer,
+        'Clinics' : clinicsLayer
     };
 
     map.addLayer(osmMap);
@@ -309,6 +313,26 @@ function addSchoolsMap(schoolData) {
     });
     schoolsLayer = geoJsonLayer;
     schoolGeoJsonData = schoolData;
+}
+
+function addClinicMap(clinicData) {
+    var clinicIcon = L.icon({
+        iconUrl: 'img/clinic.png',
+        iconSize:[15,15]
+    });
+
+    var geoJsonLayer = new L.geoJson(clinicData, {
+        onEachFeature: function(feature,layer){
+            layer.bindPopup(renderFeatureTableFor(feature));
+        },
+        pointToLayer: function(feature,latlng){
+            return L.marker(latlng, {
+                icon:clinicIcon
+            });
+        }
+    });
+
+    clinicsLayer = geoJsonLayer;
 }
 
 

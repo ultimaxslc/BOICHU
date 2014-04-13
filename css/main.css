@@ -83,7 +83,7 @@ h4 {
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    font-size:1.25em;
+    font-size:1.1em;
 }
 .switch {
     color: #6f839a;
@@ -99,6 +99,7 @@ h4 {
     -ms-transition: .15s ease;
     -o-transition: .15s ease;
     transition: .15s ease;
+    font-weight:normal;
 }
 input[type="radio"]:checked + .switch {
     color: #fff;
